@@ -1,3 +1,7 @@
 *,*::after,*::before{
   margin:0; padding:0;
 }
+
+body{color:#343434;}
+
+a{text-decoration: none; color:inherit;}
