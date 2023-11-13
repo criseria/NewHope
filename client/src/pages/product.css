@@ -8,18 +8,23 @@
   width:50%;
 }
 
+.product__detail-like-message{background-color: #fff1f1; box-shadow: 0 0 2px #ffadad; padding:4px 12px; border-radius: 4px; color:#787878;}
+
 .product__detail-price-wrap{width:100%; display:flex; align-items: center; justify-content: space-between;}
 .product__detail-price-wrap p{padding-right:4px;}
 
-.product__detail-amount-wrap{display: flex; border:1px solid #787878; box-sizing: border-box; height:36px; border-radius: 4px;}
-.product__detail-amount-wrap button{border:0; outline:0; background-color: transparent; line-height: 20px; padding:8px;}
-.product__detail-amount-wrap input{border:0; outline: 0; text-align: center; width:60px; line-height: 20px; font-size: 14px; font-weight: bold;}
+.product__detail-amount-wrap{display: flex; border:1px solid #cccccc; box-sizing: border-box; height:36px; border-radius: 4px; overflow:hidden}
+.product__detail-amount-wrap button{border:0; outline:0; background-color: transparent; position:relative; line-height: 36px; width:34px;}
+.product__detail-amount-wrap .product__detail-plus-btn::after,.product__detail-amount-wrap .product__detail-minus-btn::after{position:absolute;top:50%;left:50%;transform: translate(-50%,-50%); content:''; display: block; width:12px; height:2px; background-color: #787878;}
+.product__detail-amount-wrap .product__detail-plus-btn::before{position:absolute;top:50%;left:50%;transform: translate(-50%,-50%); content:''; display: block; width:2px; height:12px; background-color: #787878;}
+.product__detail-amount-wrap input{border:0; outline: 0; text-align: center; width:60px; line-height: 20px; font-size: 14px; font-weight: bold; border-left:1px solid #cccccc; border-right:1px solid #cccccc}
 
 .product__detail-button-wrap{display:flex; justify-content: space-between; gap:0 4px; margin-top: 8px;}
-.product__detail-button-wrap > *{width:calc(33.3%); text-align: center; padding:8px 0; line-height: 20px; border:1px solid #787878; border-radius: 4px;}
+.product__detail-button-wrap > *{width:calc(33.3%); text-align: center; padding:8px 0; line-height: 20px; border:1px solid #cccccc; border-radius: 4px;}
 
 @media screen and (max-width:768px){
   .product__detail-product-wrap > .center__img-wrap{border-radius: 0px;}
+  .product__detail-product-wrap > .container__default-container{margin-top:24px}
   .product__detail-product-wrap > div{
     width:100%;
   }
