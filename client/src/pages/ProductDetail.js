@@ -6,6 +6,7 @@ import { fetcher } from '../utils/fetcher'
 import Text from '../components/text/Text';
 import Title from '../components/text/Title';
 import IrTitle from '../components/text/IrTitle';
+import IrText from '../components/text/IrText';
 import useLogin from '../hooks/useLogin'
 import CenterImg from '../components/image/CenterImg'
 import Container from '../components/container/Container'
@@ -53,16 +54,20 @@ const ProductDetail = () => {
           <div className='product__detail-product-wrap'>
             <CenterImg src={product.productImage} alt={'상품 이미지'} />
             <Container>
+              {product.likes.length !== 0 ? <Text cls={'product__detail-like-message'} text={`${product.likes.length}명이 관심을 가지고 있어요`} /> : ""}
               <Text text={product.owner.userName} />
-              {product.likes.length !== 0 ? <Text text={`${product.likes.length}명이 관심을 가지고 있어요`} /> : ""}
               <Title text={product.productName} />
               <Text text={product.productDescription} />
               <Text cls={'product__detail-price'} text={`${product.productPrice.toLocaleString('ko-KR')}원`} />
               <div className='product__detail-price-wrap'>
                 <div className='product__detail-amount-wrap'>
-                  <button onClick={onMinus}>-</button>
+                  <button className={'product__detail-minus-btn'} onClick={onMinus}>
+                    <IrText text={'수량 줄이기'} />
+                  </button>
                   <input type='text' value={isNum} readOnly />
-                  <button onClick={onPlus}>+</button>
+                  <button className={'product__detail-plus-btn'} onClick={onPlus}>
+                    <IrText text={'수량 늘리기'} />
+                  </button>
                 </div>
                 <p>
                   총 금액{(isNum * product.productPrice).toLocaleString('ko-KR')}원
