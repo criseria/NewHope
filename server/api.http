@@ -2,12 +2,12 @@ POST http://localhost:8080/auth/register HTTP/1.1
 Content-Type: application/json; charset=UTF-8
 
 {
-    "userName": "test",
-  "userId": "test",
-  "userPassword":"test",
-  "userEmail": "test",
-  "userAddress": "test",
-  "userPhoneNum": "test"
+    "userName": "test1",
+  "userId": "test1",
+  "userPassword":"test1",
+  "userEmail": "test1",
+  "userAddress": "test1",
+  "userPhoneNum": "test1"
 }
 
 ####
@@ -18,3 +18,23 @@ Content-Type: application/json; charset=UTF-8
     "userId": "test",
     "userPassword": "test"
 }
+
+####
+POST http://localhost:8080/product/create HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"654c8539ee005367bc3b748f", 
+    "productName":"테스트", 
+    "productDescription":"테스트", 
+    "productImage":"https://s.pstatic.net/shopping.phinf/20231110_25/f6e19248-3b5b-47ac-b600-c495eca310f0.jpg?type=f294_378", 
+    "productPrice":30000
+}
+
+####
+POST http://localhost:8080/product/likes HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"654c8539ee005367bc3b748f", 
+    "id":"6551be97df23fc93a2246261"}
