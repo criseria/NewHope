@@ -1,32 +1,165 @@
 const userModel = require('../models/userModel')
 
+// 회원가입
 const register = async (req, res) => {
   const userData = req.body;
 
   try {
     const findUser = await userModel.findOne({ userId: userData.userId })
-    if (findUser) return console.log('이미 등록된 아이디')
+    if (findUser) {
+      return res.status(400).json({ message: '이미 등록된 아이디 입니다.' });
+    }
 
     const user = new userModel(userData);
-    // await user.save();
+    await user.save();
     res.status(200).json({ message: '회원가입 성공' });
   } catch (error) {
     res.status(500).json({ error: '서버 오류', message: error.message });
   }
 }
 
+// 로그인
 const login = async (req, res) => {
   const { userId, userPassword } = req.body;
+
   try {
-    const user = await userModel.findOne({ userId, userPassword });
+    const user = await userModel.findOne({ userId });
+
     if (user) {
-      res.status(200).json({ message: "로그인 성공" });
+      if (user.userPassword === userPassword) {
+        req.session.user = user;
+        console.log(req.session);
+        res.cookie('dkfjdkfjaksfjddksjf3232', 'sadf12j8er893qndfs', { maxAge: 3600000, httpOnly: true });
+        res.status(200).json({ message: "로그인 성공" });
+      } else {
+        res.status(401).json({ message: "비밀번호가 일치하지 않습니다" });
+      }
     } else {
-      res.status(401).json({ message: "아이디 또는 비밀번호가 일치하지 않습니다." });
+      res.status(401).json({ message: "등록되지않은 사용자입니다" });
     }
   } catch (error) {
     res.status(500).json({ error: "서버 오류", message: error.message });
   }
+};
+
+// 유저의 정보 가져오기
+const getUserInfo = async (req, res) => {
+  const userInfo = req.session.user;
+
+  if (userInfo) {
+    res.status(200).json({
+      userName: userInfo.userName,
+      userEmail: userInfo.userEmail,
+      userAddress: userInfo.userAddress,
+      userPhoneNum: userInfo.userPhoneNum
+    });
+  } else {
+    res.status(401).json({ message: "인증되지 않은 사용자 입니다." });
+  }
 }
 
-module.exports = { register, login }
+// 로그아웃
+const logout = (req, res) => {
+  // 클라이언트 쿠키 제거
+  res.clearCookie('dkfjdkfjaksfjddksjf3232');
+
+  // 서버 측 세션 제거 (express-session 사용 시)
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).json({ error: '서버 오류', message: '세션 제거 중 에러 발생' });
+    } else {
+      // 클라이언트와 서버 측 캐시 무시 헤더 추가
+      res.setHeader('Cache-Control', 'no-store');
+      res.status(200).json({ message: '로그아웃 성공' });
+    }
+  });
+};
+
+// 비밀번호 인증하기
+const passwordVerification = async (req, res) => {
+  const { userPassword } = req.body;
+
+  try {
+    const user = req.session.user;
+
+    if (!user) {
+      return res.status(401).json({ message: "세션이 만료되었습니다." });
+    }
+
+    if (user.userPassword === userPassword) {
+      // 비밀번호 일치 시, 클라이언트와 서버 측 캐시 무시 헤더 추가
+      res.setHeader('Cache-Control', 'no-store');
+      res.status(200).json({ message: "비밀번호 확인 성공" });
+    } else {
+      res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
+    }
+  } catch (error) {
+    console.error("Error in passwordVerification:", error);
+    res.status(500).json({ error: "서버 오류", message: error.message });
+  }
+};
+
+// 회원정보 수정하기
+const editProfile = async (req, res) => {
+  // 현재 로그인한 사용자의 아이디를 가져오고
+  const userId = req.session.user.userId;
+  // 클라이언트에서 전달된 업데이트할 데이터를 가져와서 아래와 같이 업데이트
+  const updatedData = req.body;
+
+  try {
+    const user = await userModel.findOne({ userId });
+
+    if (!user) {
+      return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+    }
+
+    // 업데이트할 datalist
+    user.userName = updatedData.userName || user.userName;
+    user.userEmail = updatedData.userEmail || user.userEmail;
+    user.userAddress = updatedData.userAddress || user.userAddress;
+    user.userPhoneNum = updatedData.userPhoneNum || user.userPhoneNum;
+
+    // 비밀번호를 변경할 때에는 안전한 방법으로 업데이트
+    if (updatedData.userPassword) {
+      user.userPassword = updatedData.userPassword;
+    }
+
+    await user.save();
+    req.session.user = user;
+
+    res.status(200).json({ message: '회원정보가 수정 되었습니다.' });
+  } catch (error) {
+    res.status(500).json({ error: '서버 오류', message: error.message });
+  }
+};
+
+// 회원 탈퇴
+const deleteAccount = async (req, res) => {
+  const { userPassword } = req.body;
+
+  console.log('Received password:', userPassword);
+
+  try {
+    const user = req.session.user;
+
+    if (user.userPassword === userPassword) {
+      await userModel.findByIdAndDelete(user._id);
+      req.session.destroy((err) => {
+        if (err) {
+          console.error('Error destroying session:', err);
+        }
+      });
+      res.clearCookie('dkfjdkfjaksfjddksjf3232');
+      res.status(200).json({ message: '회원 탈퇴 성공' });
+    } else {
+      res.status(401).json({ message: '비밀번호가 일치하지 않습니다.' });
+    }
+  } catch (error) {
+    console.error('Error in deleteAccount:', error);
+    res.status(500).json({ error: '서버 오류', message: error.message });
+  }
+};
+
+
+module.exports = { register, login, getUserInfo, logout, editProfile, passwordVerification, deleteAccount };

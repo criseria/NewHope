@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { fetcher } from '../utils/fetcher'
-// import { useNavigate } from 'react-router';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  // const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     userName: '',
@@ -20,6 +17,7 @@ function Register() {
   const [passwordError, setPasswordError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     console.log(formData.userPassword, formData.passwordConfirm);
@@ -93,8 +91,8 @@ function Register() {
       try {
         const res = await fetcher('post', '/auth/register', formData)
         console.log(res)
-
-        // navigate('/');
+        alert('회원가입이 완료되었습니다.');
+        navigate('/');
       } catch (error) {
         console.error('회원가입 실패 : ', error);
       }

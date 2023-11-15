@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
 import useLogin from '../hooks/useLogin';
+import { useAuth } from '../contexts/AuthContext';
 
 function LoginPage() {
     const Login = useLogin();
-    const navigate = useNavigate();
+    const auth = useAuth();
+
 
     const [userId, setUserid] = useState("");
     const [Password, setPassword] = useState("");
@@ -17,7 +18,7 @@ function LoginPage() {
         setPassword(event.currentTarget.value);
     }
 
-    const onSubmitHandler = (event) => {
+    const onSubmitHandler = async (event) => {
         event.preventDefault();
 
         console.log('userId', userId);
@@ -28,9 +29,8 @@ function LoginPage() {
             userPassword: Password,
         }
 
-        Login.loginUser(body);
-
-        navigate('/');
+        // 그리고 useLogin의 loginUser를 호출할 때 useAuth를 전달
+        await Login.loginUser(auth, body);
     }
 
     return (
