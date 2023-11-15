@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 const useMyPageData = () => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [userPostcode , setUserPostcode] = useState('');
   const [userAddress, setUserAddress] = useState('');
+  const [userDetailAddress, setUserDetailAddress] = useState('');
   const [userPhoneNum, setUserPhoneNum] = useState('');
   const navigate = useNavigate();
 
@@ -15,7 +17,9 @@ const useMyPageData = () => {
         const userData = await fetcher('get', '/auth/Mypage', { withCredentials: true });
         setUserName(userData.userName);
         setUserEmail(userData.userEmail);
+        setUserPostcode(userData.userPostcode);
         setUserAddress(userData.userAddress);
+        setUserDetailAddress(userData.userDetailAddress);
         setUserPhoneNum(userData.userPhoneNum);
       } catch (error) {
         console.log('유저데이터를 가져오는데 실패', error);
@@ -29,7 +33,9 @@ const useMyPageData = () => {
     try {
       await setUserName(userName);
       await setUserEmail(userEmail);
+      await setUserPostcode(userPostcode);
       await setUserAddress(userAddress);
+      await setUserDetailAddress(userDetailAddress);
       await setUserPhoneNum(userPhoneNum);
       // 서버로 수정된 정보를 전송
       const updatedData = await fetcher('put', '/auth/Mypage/editProfile', {
@@ -50,11 +56,15 @@ const useMyPageData = () => {
   return {
     userName,
     userEmail,
+    userPostcode,
     userAddress,
+    userDetailAddress,
     userPhoneNum,
     setUserName,
     setUserEmail,
+    setUserPostcode,
     setUserAddress,
+    setUserDetailAddress,
     setUserPhoneNum,
     updateUserInfo
   };

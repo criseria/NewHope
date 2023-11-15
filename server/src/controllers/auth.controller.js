@@ -50,7 +50,9 @@ const getUserInfo = async (req, res) => {
     res.status(200).json({
       userName: userInfo.userName,
       userEmail: userInfo.userEmail,
+      userPostcode: userInfo.userPostcode,
       userAddress: userInfo.userAddress,
+      userDetailAddress: userInfo.userDetailAddress,
       userPhoneNum: userInfo.userPhoneNum
     });
   } else {
@@ -117,7 +119,9 @@ const editProfile = async (req, res) => {
     // 업데이트할 datalist
     user.userName = updatedData.userName || user.userName;
     user.userEmail = updatedData.userEmail || user.userEmail;
+    user.userPostcode = updatedData.userPostcode || user.userPostcode;
     user.userAddress = updatedData.userAddress || user.userAddress;
+    user.userDetailAddress = updatedData.userDetailAddress || user.userDetailAddress;
     user.userPhoneNum = updatedData.userPhoneNum || user.userPhoneNum;
 
     // 비밀번호를 변경할 때에는 안전한 방법으로 업데이트

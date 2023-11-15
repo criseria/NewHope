@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { fetcher } from '../utils/fetcher'
 import { useNavigate } from 'react-router-dom';
+import DaumPostcode from 'react-daum-postcode';
+import './Register.css';
 
 function Register() {
 
@@ -10,10 +12,13 @@ function Register() {
     userPassword: '',
     passwordConfirm: '',
     userEmail: '',
+    userPostcode: '',
     userAddress: '',
+    userDetailAddress:'',
     userPhoneNum: ''
   });
 
+  const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
@@ -63,6 +68,24 @@ function Register() {
     } else {
       setEmailError('');
     }
+  };
+
+  // 도로명주소 api
+  const handleComplete = (data) => {
+    const selectedAddress = data.address;
+    const selectedPostcode = data.zonecode;
+
+    setFormData({
+      ...formData,
+      userPostcode: selectedPostcode,
+      userAddress: selectedAddress,
+    });
+
+    setIsPostcodeOpen(false);
+  };
+
+  const handleAddressSearch = () => {
+    setIsPostcodeOpen(true);
   };
 
 
@@ -132,7 +155,22 @@ function Register() {
         <p></p>
         <div className="form-group">
           <label>주소</label>
+          <div>
+            <button type='button' onClick={handleAddressSearch}>
+              주소 검색
+            </button>
+          </div>
+          {isPostcodeOpen && (
+            <div className="modal">
+              <div className="modal-content">
+                <DaumPostcode onComplete={handleComplete} />
+                <button onClick={() => setIsPostcodeOpen(false)}>닫기</button>
+              </div>
+            </div>
+          )}
+          <input type="text" name="postcode" value={formData.userPostcode} className="form-control" readOnly />
           <input type="text" name="userAddress" value={formData.userAddress} onChange={handleInputChange} className="form-control" />
+          <input type="text" name='userDetailAddress' value={formData.userDetailAddress} onChange={handleInputChange} className="form-control" />
         </div>
         <p></p>
         <div className="form-group">

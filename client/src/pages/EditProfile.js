@@ -6,11 +6,15 @@ const EditProfile = () => {
   const {
     userName,
     userEmail,
+    userPostcode,
     userAddress,
+    userDetailAddress,
     userPhoneNum,
     setUserName,
     setUserEmail,
+    setUserPostcode,
     setUserAddress,
+    setUserDetailAddress,
     setUserPhoneNum,
     updateUserInfo
   } = useMyPageData();
@@ -27,8 +31,16 @@ const EditProfile = () => {
         <input type="text" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
       </label>
       <label>
+        우편번호:
+        <input type="text" value={userPostcode} onChange={(e) => setUserPostcode(e.target.value)} />
+      </label>
+      <label>
         주소:
         <input type="text" value={userAddress} onChange={(e) => setUserAddress(e.target.value)} />
+      </label>
+      <label>
+        상세주소:
+        <input type="text" value={userDetailAddress} onChange={(e) => setUserDetailAddress(e.target.value)} />
       </label>
       <label>
         핸드폰번호:
