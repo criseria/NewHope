@@ -8,6 +8,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import EditProfile from './pages/EditProfile';
 import DeleteAccount from './pages/DeleteAccount';
 import PasswordVerification from './pages/PasswordVerification';
+import Animal from './pages/Animal';
+import AnimalInfo from './pages/AnimalInfo';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             <Route path='/Mypage/edit' element={<EditProfile />} />
             <Route path='/Mypage/DeleteAccount' element={<DeleteAccount />} />
             <Route path='/passwordVerification' element={<PasswordVerification />} />
+            <Route path='/animal' element={<Animal />}></Route>
+            <Route path='/animal/view' element={<AnimalInfo />} />
           </Routes>
         </AuthProvider>
       </Router>

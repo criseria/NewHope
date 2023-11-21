@@ -13,13 +13,16 @@ const NavBar = () => {
     logout();
     navigate('/');
     document.cookie = 'dkfjdkfjaksfjddksjf3232=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    // 쿠키 삭제 후 콘솔로그로 확인하는 코드
+    // 쿠키 삭제 후 콘솔로그로 확인
     // console.log(document.cookie);
   };
 
   return (
     <div>
+      <Link to="/animal">유기동물소개</Link>
+      <p></p>
       <Link to="/register">회원가입</Link>
+      <p></p>
       {isLoggedIn ? (
         <>
           <Link to="/Mypage">Mypage</Link>

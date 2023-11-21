@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetcher } from '../utils/fetcher'
 import { useNavigate } from 'react-router-dom';
 import DaumPostcode from 'react-daum-postcode';
+import useEmailVerification from '../hooks/useEmailVerification';
 import './Register.css';
 
 function Register() {
+  const {
+    isVerificationSent,
+    isCodeVerified,
+    sendVerificationEmail,
+    verifyCode,
+  } = useEmailVerification();
 
   const [formData, setFormData] = useState({
     userName: '',
@@ -14,15 +21,34 @@ function Register() {
     userEmail: '',
     userPostcode: '',
     userAddress: '',
-    userDetailAddress:'',
-    userPhoneNum: ''
+    userDetailAddress: '',
+    userPhoneNum: '',
+    authCode: '',
   });
 
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
+  const [isSignUpButtonEnabled, setIsSignUpButtonEnabled] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsSignUpButtonEnabled(isCodeVerified);
+  }, [isCodeVerified]);
+
+  const handleVerificationCodeInput = (e) => {
+    const { value } = e.target;
+    setFormData({ ...formData, authCode: value });
+  };
+
+  const handleSendVerification = async () => {
+    await sendVerificationEmail(formData.userEmail);
+  };
+
+  const handleVerifyCode = () => {
+    verifyCode(formData.authCode);
+  };
 
   const handleInputChange = (e) => {
     console.log(formData.userPassword, formData.passwordConfirm);
@@ -43,6 +69,7 @@ function Register() {
     }
   };
 
+  // 비밀번호 정규식
   const validatePassword = (password, confirmPassword) => {
     const passwordRegex = /^[A-Za-z0-9]{3,13}$/;
 
@@ -60,6 +87,7 @@ function Register() {
     }
   };
 
+  // 이메일 정규식
   const validateEmail = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -88,6 +116,23 @@ function Register() {
     setIsPostcodeOpen(true);
   };
 
+  // 아이디 중복 검사 
+  const handleIdCheck = async () => {
+    try {
+      const res = await fetcher('post', '/auth/checkDuplicate', { userId: formData.userId });
+
+      if (res && res.duplicate) {
+        alert('이미 등록된 아이디입니다.');
+        setIsSignUpButtonEnabled(false);
+      } else {
+        setIsSignUpButtonEnabled(true);
+        alert('사용 가능한 아이디입니다.');
+      }
+    } catch (error) {
+      console.error('중복 체크 오류:', error);
+      setIsSignUpButtonEnabled(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,6 +149,8 @@ function Register() {
       alert('비밀번호를 입력해주세요.');
     } else if (!formData.userEmail) {
       alert('이메일을 입력해주세요.');
+    } else if (!formData.authCode || !isCodeVerified) {
+      alert('이메일 인증을 완료해주세요.');
     } else if (!formData.userAddress) {
       alert('주소를 입력해주세요.');
     } else if (!formData.userPhoneNum) {
@@ -112,12 +159,13 @@ function Register() {
       alert('비밀번호를 확인해주세요.');
     } else {
       try {
-        const res = await fetcher('post', '/auth/register', formData)
-        console.log(res)
+        const res = await fetcher('post', '/auth/register', formData);
+        console.log(res);
         alert('회원가입이 완료되었습니다.');
         navigate('/');
       } catch (error) {
         console.error('회원가입 실패 : ', error);
+        alert('서버 오류로 회원가입에 실패했습니다.');
       }
     }
   };
@@ -135,6 +183,15 @@ function Register() {
           <input type="text" name="userId" value={formData.userId} onChange={handleInputChange} className="form-control" />
         </div>
         <p></p>
+        <button
+          className="btn btn-warning"
+          style={{ float: 'right' }}
+          type="button"
+          onClick={handleIdCheck}
+        >
+          중복 체크
+        </button>
+        <p></p>
         <div className="form-group">
           <label>비밀번호</label>
           <input type="password" name="userPassword" value={formData.userPassword} onChange={handleInputChange} className="form-control" />
@@ -151,6 +208,32 @@ function Register() {
           <label>이메일</label>
           <input type="text" name="userEmail" value={formData.userEmail} onChange={handleInputChange} className="form-control" />
           <span style={{ color: 'red' }}>{emailError}</span>
+          <button
+            className="btn btn-warning"
+            type="button"
+            onClick={handleSendVerification}
+            disabled={isVerificationSent}
+          >
+            인증 코드 전송
+          </button>
+        </div>
+        <div className="form-group">
+          <label>인증 코드</label>
+          <input
+            type="text"
+            name="verificationCode"
+            value={formData.verificationCode}
+            onChange={handleVerificationCodeInput}
+            className="form-control"
+          />
+          <button
+            className="btn btn-warning"
+            type="button"
+            onClick={handleVerifyCode}
+            disabled={!isVerificationSent}
+          >
+            인증하기
+          </button>
         </div>
         <p></p>
         <div className="form-group">
@@ -178,7 +261,14 @@ function Register() {
           <input type="text" name="userPhoneNum" value={formData.userPhoneNum} onChange={handleInputChange} className="form-control" />
         </div>
         <p></p>
-        <button className="btn btn-warning" style={{ float: 'right' }} type="submit">회원가입</button>
+        <button
+          className="btn btn-warning"
+          style={{ float: 'right' }}
+          type="submit"
+          disabled={!isSignUpButtonEnabled}
+        >
+          회원가입
+        </button>
       </form>
     </div>
   );

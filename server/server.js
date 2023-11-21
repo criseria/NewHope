@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
 const routes = require('./src/routes');
 const cors = require('cors');
@@ -58,4 +57,5 @@ const port = PORT || 8000
 app.listen(port, function () {
   console.log(`${port} 포트`);
 })
+
 

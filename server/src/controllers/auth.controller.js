@@ -1,13 +1,18 @@
 const userModel = require('../models/userModel')
+const mailer = require('nodemailer');
+const convert = require('xml-js');
+const axios = require('axios');
+
 
 // 회원가입
 const register = async (req, res) => {
   const userData = req.body;
 
   try {
-    const findUser = await userModel.findOne({ userId: userData.userId })
+    const findUser = await userModel.findOne({ userId: userData.userId });
+
     if (findUser) {
-      return res.status(400).json({ message: '이미 등록된 아이디 입니다.' });
+      return res.status(400).json({ message: '이미 등록된 아이디 입니다' });
     }
 
     const user = new userModel(userData);
@@ -17,6 +22,25 @@ const register = async (req, res) => {
     res.status(500).json({ error: '서버 오류', message: error.message });
   }
 }
+
+// 아이디 중복 검사
+const checkDuplicate = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const existingUser = await userModel.findOne({ userId });
+
+    if (existingUser) {
+      return res.status(200).json({ duplicate: true, message: '이미 등록된 아이디입니다.' });
+    }
+
+    // 중복이 아닌 경우
+    res.status(200).json({ duplicate: false, message: '사용 가능한 아이디입니다.' });
+  } catch (error) {
+    console.error('Error in check-duplicate:', error);
+    res.status(500).json({ error: '서버 오류', message: error.message });
+  }
+};
 
 // 로그인
 const login = async (req, res) => {
@@ -165,5 +189,60 @@ const deleteAccount = async (req, res) => {
   }
 };
 
+// 이메일 인증하기
+const smtpTransport = mailer.createTransport({
+  pool: true,
+  maxConnections: 1,
+  service: "naver",
+  host: "smtp.naver.com",
+  port: 465,
+  secure: false,
+  requireTLS: true,
+  auth: {
+    user: "criseria4212@naver.com", // 보내는 사람 이메일
+    pass: "infra52x!4212", // 비밀번호
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 
-module.exports = { register, login, getUserInfo, logout, editProfile, passwordVerification, deleteAccount };
+// 이메일 인증을 위해 사용될 난수를 생성
+const generateRandomNumber = function (min, max) {
+  var randNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randNum;
+};
+
+const emailAuth = async (req, res) => {
+  const number = generateRandomNumber(111111, 999999);
+  const { email, verificationCode } = req.body;
+
+  res.json({ ok: true, msg: "인증 코드를 성공적으로 받아왔습니다.", authNum: number });
+
+  // 이메일 전송 양식 ( html에 원하는대로 양식을 변경하면 된다.)
+  const mailOptions = {
+    from: "criseria4212@naver.com",
+    // 사용자가 회원가입 페이지에서 입력한 이메일 주소
+    to: email,
+    subject: "인증 관련 메일 입니다.",
+    html: `<h1>인증번호를 입력해주세요<br><br><br><br></h1>${number}`,
+  };
+
+  smtpTransport.sendMail(mailOptions, (err, response) => {
+    console.log("error", err);
+    console.log("response", response);
+
+    if (err) {
+      res.json({ ok: false, msg: "메일 전송에 실패하였습니다." });
+      smtpTransport.close();
+      return;
+    } else {
+      res.json({ ok: true, msg: "메일 전송에 성공하였습니다.", authNum: verificationCode });
+      smtpTransport.close();
+      return;
+    }
+  });
+};
+
+
+module.exports = { register, login, getUserInfo, logout, editProfile, passwordVerification, deleteAccount, checkDuplicate, emailAuth };
