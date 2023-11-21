@@ -1,8 +1,9 @@
 const userModel = require('../models/userModel')
 const mailer = require('nodemailer');
-const convert = require('xml-js');
-const axios = require('axios');
+const dotenv = require('dotenv')
+dotenv.config();
 
+const { EMAIL_USER , EMAIL_PASSWORD  } = process.env
 
 // 회원가입
 const register = async (req, res) => {
@@ -189,6 +190,8 @@ const deleteAccount = async (req, res) => {
   }
 };
 
+
+
 // 이메일 인증하기
 const smtpTransport = mailer.createTransport({
   pool: true,
@@ -199,8 +202,8 @@ const smtpTransport = mailer.createTransport({
   secure: false,
   requireTLS: true,
   auth: {
-    user: "criseria4212@naver.com", // 보내는 사람 이메일
-    pass: "infra52x!4212", // 비밀번호
+    user: process.env.EMAIL_USER, // 보내는 사람 이메일
+    pass: process.env.EMAIL_PASSWORD, // 비밀번호
   },
   tls: {
     rejectUnauthorized: false,
