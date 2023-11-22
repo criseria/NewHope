@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetcher } from '../utils/fetcher';
 import ReactPlayer from 'react-player';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import '../pages/AnimalInfo.css'
 
 const AnimalInfo = () => {
   const location = useLocation();
@@ -32,10 +36,27 @@ const AnimalInfo = () => {
     return <div>Loading...</div>;
   }
 
-  // 여기서 animalInfo를 사용하여 상세 정보를 표시합니다.
+  // 슬라이더 설정
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    arrows : true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    className: 'custom-slider', // 추가한 부분
+};
+
   return (
     <div>
       <h1>서울 동물복지센터</h1>
+      <Slider {...sliderSettings}>
+        {animalInfo.PHOTOS.map((photo, index) => (
+          <div key={index}>
+            <img src={`https://${photo}`} alt={`Animal Photo ${index + 1}`} />
+          </div>
+        ))}
+      </Slider>
       <table>
         <thead>
           <tr>
@@ -77,3 +98,4 @@ const AnimalInfo = () => {
 }
 
 export default AnimalInfo;
+

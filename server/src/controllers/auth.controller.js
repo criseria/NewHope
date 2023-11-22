@@ -1,9 +1,10 @@
 const userModel = require('../models/userModel')
 const mailer = require('nodemailer');
 const dotenv = require('dotenv')
+const bcrypt = require('bcrypt');
 dotenv.config();
 
-const { EMAIL_USER , EMAIL_PASSWORD  } = process.env
+const { EMAIL_USER, EMAIL_PASSWORD } = process.env
 
 // 회원가입
 const register = async (req, res) => {
@@ -16,7 +17,13 @@ const register = async (req, res) => {
       return res.status(400).json({ message: '이미 등록된 아이디 입니다' });
     }
 
-    const user = new userModel(userData);
+    // 비밀번호 해싱 (10은 salt rounds를 나타낸다.)
+    const hashedPassword = await bcrypt.hash(userData.userPassword, 10);
+
+    const user = new userModel({
+      ...userData,
+      userPassword: hashedPassword,
+    });
     await user.save();
     res.status(200).json({ message: '회원가입 성공' });
   } catch (error) {
@@ -51,7 +58,9 @@ const login = async (req, res) => {
     const user = await userModel.findOne({ userId });
 
     if (user) {
-      if (user.userPassword === userPassword) {
+      const passwordMatch = await bcrypt.compare(userPassword, user.userPassword);
+
+      if (passwordMatch) {
         req.session.user = user;
         console.log(req.session);
         res.cookie('dkfjdkfjaksfjddksjf3232', 'sadf12j8er893qndfs', { maxAge: 3600000, httpOnly: true });
@@ -114,7 +123,9 @@ const passwordVerification = async (req, res) => {
       return res.status(401).json({ message: "세션이 만료되었습니다." });
     }
 
-    if (user.userPassword === userPassword) {
+    const passwordMatch = await bcrypt.compare(userPassword, user.userPassword);
+
+    if (passwordMatch) {
       // 비밀번호 일치 시, 클라이언트와 서버 측 캐시 무시 헤더 추가
       res.setHeader('Cache-Control', 'no-store');
       res.status(200).json({ message: "비밀번호 확인 성공" });

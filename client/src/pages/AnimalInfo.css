@@ -1,0 +1,23 @@
+
+
+.slick-slide img {
+    object-fit: cover;
+    height: 500px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.slick-slider {
+    width: 50%;
+    height: 500px;
+}
+
+.slick-next {
+    z-index: 999;
+    right: 15px;
+}
+
+.slick-prev {
+    z-index: 999;
+    left: 15px;
+}

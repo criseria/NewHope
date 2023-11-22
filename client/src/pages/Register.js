@@ -159,7 +159,10 @@ function Register() {
       alert('비밀번호를 확인해주세요.');
     } else {
       try {
-        const res = await fetcher('post', '/auth/register', formData);
+        const res = await fetcher('post', '/auth/register', {
+          ...formData,
+          userPassword: formData.userPassword,
+        });
         console.log(res);
         alert('회원가입이 완료되었습니다.');
         navigate('/');
