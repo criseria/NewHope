@@ -11,5 +11,6 @@ router.get("/Mypage", getUserInfo)
 router.put('/Mypage/editProfile', editProfile);
 router.post('/passwordVerification', passwordVerification);
 router.delete('/Mypage/DeleteAccount' , deleteAccount);
+router.get('/getUserInfo' , getUserInfo);
 
 module.exports = router
