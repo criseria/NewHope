@@ -5,12 +5,8 @@ function Intro() {
 
     return (
         <div className="App">
-            <MapTest/>
-
-    
+            <MapTest></MapTest>
         </div>
-
-
     );
 }
 

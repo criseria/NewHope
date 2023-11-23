@@ -5,10 +5,14 @@ const { kakao } = window;
 
 
 
+
 export default function MapTest() {
 
     const [InputText, setInputText] = useState('')
     const [Place, setPlace] = useState('')
+
+
+
 
     const onChange = (e) => {
       setInputText(e.target.value)
@@ -19,7 +23,7 @@ export default function MapTest() {
       setPlace(InputText)
       setInputText('')
     }
-
+    
     
     useEffect(() => {
         mapscript();
