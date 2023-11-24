@@ -39,13 +39,6 @@ function BoardCreate() {
     boardDate: new Date()
   }
 
-  // const [boardData, setBoardData] = useState({
-  //   categoryId : '',
-  //   title : '',
-  //   content : '',
-  //   userId : '',
-  //   boardDate : ''
-  // })
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -69,6 +62,24 @@ function BoardCreate() {
   
   console.log(body);
 
+
+
+
+  useEffect(() => {
+    const boardDataList = async () => {
+      try{
+        // const body = await fetcher('get', '/board')
+      }
+      catch(error){
+
+      }
+    };
+    boardDataList();
+  }, []);
+
+
+
+  
 
   const HandleSubmit =  () => {
     

@@ -1,6 +1,6 @@
 // const { default: BoardCreate } = require('../../../client/src/pages/BoardCreate');
 // const boardModel = require('../models/boardModel');
-// const axios = require('axios');
+const axios = require('axios');
 
 const boardModel = require("../models/boardModel");
 
