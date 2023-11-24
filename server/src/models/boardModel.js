@@ -10,4 +10,4 @@ var boardSchema = new Schema({
     // comments: [commentSchema]
 });
 
-module.exports = mongoose.model('board', boardSchema);
+module.exports = mongoose.model('boards', boardSchema);

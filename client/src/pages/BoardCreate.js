@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import item from '../components/item';
-
 import './BoardUpdate';
 import { fetcher } from '../utils/fetcher';
-import { json, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function GetCategory() {
   let [category, setCategory] = useState(item);
@@ -25,21 +25,35 @@ function BoardCreate() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [userInfo, setUserInfo] = useState(null);
+  const [userId , setUserId] = useState('');
   const navigate = useNavigate();
   
+  // const { setBoardData } = useBoardData();
+
+
   const body = {
     categoryId: categoryId,
     title: title,
     content: content,
-    userName: userInfo,
+    userName: userId,
     boardDate: new Date()
   }
+
+  // const [boardData, setBoardData] = useState({
+  //   categoryId : '',
+  //   title : '',
+  //   content : '',
+  //   userId : '',
+  //   boardDate : ''
+  // })
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const userInfo = await fetcher('get', '/auth/getUserInfo');
-        
+        const userId = await fetcher('get', '/auth/getUserInfo');
+      
+        setUserId(userId.userName);
+
         if (userInfo) {
           setUserInfo(userInfo);
         } else {
@@ -49,14 +63,14 @@ function BoardCreate() {
         console.error('사용자 정보를 가져오는 중 오류 발생:', error);
       }
     };
-    
     fetchUserInfo();
+
   }, []);
   
-  console.log(userInfo);
   console.log(body);
-  
-  const HandleSubmit = async () => {
+
+
+  const HandleSubmit =  () => {
     
     if (emptyError) {
       alert('모든 문항을 다 작성해주세요.');
@@ -69,14 +83,17 @@ function BoardCreate() {
 
     } else {
       try {
-        const res = await fetcher('post', '/board/boardcreate', body);
+        const res =  fetcher('post', '/board/board/boardcreate', body);
         console.log(res);
+
+        // setBoardData((prevData) => [...prevData, res.data]);
+        
         alert('글 작성이 완료되었습니다.');
         navigate('/board');
         
       } catch (error) {
         console.error('글 작성 실패 : ', error);
-        alert('서버 오류로 글 작성에 실패했습니다.')
+        alert('서버 오류로 글 작성에 실패했습니다.');
       }
     }
   };

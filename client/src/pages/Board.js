@@ -8,7 +8,7 @@ import CommonTableRow from '../components/CommonTableRow';
 import { Link, Route } from 'react-router-dom';
 import BoardHeader from '../components/BoardHeader'; 
 
-
+// import { useBoardData } from '../path-to-context';
 
 
 function GetData() {
@@ -19,7 +19,7 @@ function GetData() {
   //   })
   // }, []);
 
-  const item = (Object.values(data)).map((board) => (
+  const item1 = (Object.values(data)).map((board) => (
     <CommonTableRow key={board.id}>
       <CommonTableColumn>{board.id}</CommonTableColumn>
       <CommonTableColumn>
@@ -32,11 +32,26 @@ function GetData() {
     </CommonTableRow>
   ));
 
-  return item;
+  return item1;
 }
 
 function Board() {
   const item = GetData();
+
+  // const { boardData } = useBoardData();
+
+  // const item = boardData.map((board) => (
+  //   <CommonTableRow key={board.id}>
+  //     <CommonTableColumn>{board.id}</CommonTableColumn>
+  //     <CommonTableColumn>
+  //       <Link to={`/board/${board.id}`}>
+  //         {board.title}
+  //       </Link>
+  //     </CommonTableColumn>
+  //     <CommonTableColumn>{board.createdAt}</CommonTableColumn>
+  //     <CommonTableColumn>{board.username}</CommonTableColumn>
+  //   </CommonTableRow>
+  // ));
 
   return (<>
     <BoardHeader></BoardHeader>

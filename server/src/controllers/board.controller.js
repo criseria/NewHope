@@ -1,24 +1,27 @@
-const boardModel = require('../models/boardModel');
-const userModel = require('../models/userModel');
-// const commentModel = require('../models/commentModel');
-const axios = require('axios');
-const { login } = require('./auth.controller');
+// const { default: BoardCreate } = require('../../../client/src/pages/BoardCreate');
+// const boardModel = require('../models/boardModel');
+// const axios = require('axios');
+
+const boardModel = require("../models/boardModel");
 
 
+// 글 작성
 const create = async(req, res) => {
-    const boardModel = req.axios.boardModel;
-    const {categoryId, title, content, userName} = req.body;
-    
-    
+    const body = req.body;
 
-    try {
-        res.status(200).json({message : '글 작성이 완료되었습니다.'});
-        res.redirect("/board");    
-        }
+    try {        
+        const { categoryId, title, content, userName } = req.body;
+
+        console.log(categoryId, title, content, userName);
+        const board = new boardModel(body);
+        await board.save();
+        res.status(201).json({message : '글 작성이 완료되었습니다.'});
+     }     
 
     catch(error){
-         res.status(500).json({ error: "서버 오류", message: error.message });
-        }   
+        console.log(error);
+        res.status(500).json({ error: "서버 오류", message: error.message });
+    }   
 };
 
 module.exports = { create };

@@ -1,26 +1,8 @@
-// const express = require('express');
-// const { login, register } = require('../controllers/auth.controller');
+const express = require('express');
+const { create } = require("../controllers/board.controller");
 
-// const router = express.Router()
+const router = express.Router();
 
-// router.post('/register', register)
-// router.post("/login", login);
-
-// module.exports = router;
-
-const { Router } = require("express");
-
-const router = Router();
-
-router.get('/voc/write/:idx', (req, res, next) => {
-    if (typeof req.session.useName !== undefined) {
-        res.render('/vocview', {id : req.params.idx});
-    }
-    else {
-        res.send(alert('로그인을 해주시기 바랍니다.'));
-    }
-
-});
-
+router.post('/board/boardcreate', create);
 
 module.exports = router;
