@@ -3,6 +3,8 @@ import { fetcher } from '../utils/fetcher'
 import { useNavigate } from 'react-router-dom';
 import DaumPostcode from 'react-daum-postcode';
 import useEmailVerification from '../hooks/useEmailVerification';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import './Register.css';
 
 function Register() {
@@ -34,16 +36,26 @@ function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsSignUpButtonEnabled(isCodeVerified);
-  }, [isCodeVerified]);
+    setIsSignUpButtonEnabled(isCodeVerified && formData.userId && formData.authCode);
+  }, [isCodeVerified, formData.userId, formData.authCode]);
 
   const handleVerificationCodeInput = (e) => {
     const { value } = e.target;
     setFormData({ ...formData, authCode: value });
   };
 
+  // 이메일 인증 코드 발송버튼
   const handleSendVerification = async () => {
-    await sendVerificationEmail(formData.userEmail);
+    if (!formData.userEmail) {
+      alert('이메일을 입력해주세요.');
+      return;
+    }
+
+    try {
+      await sendVerificationEmail(formData.userEmail);
+    } catch (error) {
+      console.error('이메일 발송 실패:', error);
+    }
   };
 
   const handleVerifyCode = () => {
@@ -125,7 +137,6 @@ function Register() {
         alert('이미 등록된 아이디입니다.');
         setIsSignUpButtonEnabled(false);
       } else {
-        setIsSignUpButtonEnabled(true);
         alert('사용 가능한 아이디입니다.');
       }
     } catch (error) {
@@ -174,105 +185,156 @@ function Register() {
   };
 
   return (
-    <div className="container mt-4">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>이름</label>
-          <input type="text" name="userName" value={formData.userName} onChange={handleInputChange} className="form-control" />
-        </div>
-        <p></p>
-        <div className="form-group">
-          <label>아이디</label>
-          <input type="text" name="userId" value={formData.userId} onChange={handleInputChange} className="form-control" />
-        </div>
-        <p></p>
-        <button
-          className="btn btn-warning"
-          style={{ float: 'right' }}
-          type="button"
-          onClick={handleIdCheck}
-        >
-          중복 체크
-        </button>
-        <p></p>
-        <div className="form-group">
-          <label>비밀번호</label>
-          <input type="password" name="userPassword" value={formData.userPassword} onChange={handleInputChange} className="form-control" />
-          <span style={{ color: 'red' }}>{passwordError}</span>
-        </div>
-        <p></p>
-        <div className="form-group">
-          <label>비밀번호 확인</label>
-          <input type="password" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleInputChange} className="form-control" />
-          <span style={{ color: 'red' }}>{passwordMatchError}</span>
-        </div>
-        <p></p>
-        <div className="form-group">
-          <label>이메일</label>
-          <input type="text" name="userEmail" value={formData.userEmail} onChange={handleInputChange} className="form-control" />
-          <span style={{ color: 'red' }}>{emailError}</span>
-          <button
-            className="btn btn-warning"
-            type="button"
-            onClick={handleSendVerification}
-            disabled={isVerificationSent}
-          >
-            인증 코드 전송
-          </button>
-        </div>
-        <div className="form-group">
-          <label>인증 코드</label>
-          <input
-            type="text"
-            name="verificationCode"
-            value={formData.verificationCode}
-            onChange={handleVerificationCodeInput}
-            className="form-control"
-          />
-          <button
-            className="btn btn-warning"
-            type="button"
-            onClick={handleVerifyCode}
-            disabled={!isVerificationSent}
-          >
-            인증하기
-          </button>
-        </div>
-        <p></p>
-        <div className="form-group">
-          <label>주소</label>
-          <div>
-            <button type='button' onClick={handleAddressSearch}>
-              주소 검색
-            </button>
+    <div className='register'>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <h1>NewHope 계정 만들기</h1>
+          <div className="form-id">
+            <TextField
+              id="demo-helper-text-misaligned"
+              label="아이디"
+              type='text'
+              name="userId"
+              value={formData.userId}
+              onChange={handleInputChange}
+            />
+            <Button type="button" color='success' variant="contained" size="medium" onClick={handleIdCheck}>
+              중복 체크
+            </Button>
           </div>
-          {isPostcodeOpen && (
-            <div className="modal">
-              <div className="modal-content">
-                <DaumPostcode onComplete={handleComplete} />
-                <button onClick={() => setIsPostcodeOpen(false)}>닫기</button>
-              </div>
+          <p></p>
+          <div className="form-group">
+            <TextField
+              id="demo-helper-text-misaligned"
+              label="비밀번호"
+              type='password'
+              name="userPassword"
+              value={formData.userPassword}
+              onChange={handleInputChange}
+            />
+            <p></p>
+            <span style={{ color: 'red' }}>{passwordError}</span>
+          </div>
+          <p></p>
+          <div className="form-group">
+            <TextField
+              id="demo-helper-text-misaligned"
+              label="비밀번호 확인"
+              type='password'
+              name="passwordConfirm"
+              value={formData.passwordConfirm}
+              onChange={handleInputChange}
+            />
+            <span style={{ color: 'red' }}>{passwordMatchError}</span>
+          </div>
+          <p></p>
+          <div className="form-group">
+            <TextField
+              id="demo-helper-text-misaligned"
+              label="이름"
+              type='text'
+              name="userName"
+              value={formData.userName}
+              onChange={handleInputChange}
+            />
+          </div>
+          <p></p>
+          <div className="form-email">
+            <TextField
+              id="demo-helper-text-misaligned"
+              label="이메일"
+              type='text'
+              name="userEmail"
+              value={formData.userEmail}
+              onChange={handleInputChange}
+            />
+            <span style={{ color: 'red' }}>{emailError}</span>
+            <Button type="button" variant="contained" size="medium" onClick={handleSendVerification} disabled={isVerificationSent}>
+              인증 코드
+            </Button>
+
+          </div>
+          <div className="form-verificationCode">
+            <TextField
+              id="demo-helper-text-misaligned"
+              label="인증 코드"
+              type='text'
+              name="verificationCode"
+              value={formData.verificationCode}
+              onChange={handleVerificationCodeInput}
+            />
+            <Button type="button" variant="contained" color='success' size="medium" onClick={handleVerifyCode} disabled={!isVerificationSent}>
+              인증 확인
+            </Button>
+          </div>
+          <p></p>
+          <div>
+            <div className='form-postcode'>
+              <TextField
+                id="demo-helper-text-misaligned"
+                label="우편번호"
+                type='text'
+                name="postcode"
+                value={formData.userPostcode}
+                readOnly
+              />
+              <Button type="button" variant="contained" size="medium" onClick={handleAddressSearch}>
+                주소 검색
+              </Button>
             </div>
-          )}
-          <input type="text" name="postcode" value={formData.userPostcode} className="form-control" readOnly />
-          <input type="text" name="userAddress" value={formData.userAddress} onChange={handleInputChange} className="form-control" />
-          <input type="text" name='userDetailAddress' value={formData.userDetailAddress} onChange={handleInputChange} className="form-control" />
-        </div>
-        <p></p>
-        <div className="form-group">
-          <label>핸드폰번호</label>
-          <input type="text" name="userPhoneNum" value={formData.userPhoneNum} onChange={handleInputChange} className="form-control" />
-        </div>
-        <p></p>
-        <button
-          className="btn btn-warning"
-          style={{ float: 'right' }}
-          type="submit"
-          disabled={!isSignUpButtonEnabled}
-        >
-          회원가입
-        </button>
-      </form>
+            {isPostcodeOpen && (
+              <div className="modal">
+                <div className="modal-content">
+                  <DaumPostcode onComplete={handleComplete} />
+                  <button onClick={() => setIsPostcodeOpen(false)}>닫기</button>
+                </div>
+              </div>
+            )}
+            <div className='form-address'>
+              <TextField
+                id="demo-helper-text-misaligned"
+                label="주소"
+                type='text'
+                name="userAddress"
+                value={formData.userAddress}
+                readOnly
+              />
+              <TextField
+                id="demo-helper-text-misaligned"
+                label="상세주소"
+                type='text'
+                name="userDetailAddress"
+                value={formData.userDetailAddress}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <p></p>
+          <div className="form-group">
+            <TextField
+              id="demo-helper-text-misaligned"
+              label="핸드폰번호"
+              type='text'
+              name="userPhoneNum"
+              value={formData.userPhoneNum}
+              onChange={handleInputChange}
+            />
+          </div>
+          <p></p>
+          {/* <button
+            className="btn btn-warning"
+            style={{ float: 'right' }}
+            type="submit"
+            disabled={!isSignUpButtonEnabled}
+          >
+            회원가입
+          </button> */}
+          <Button type="submit" variant="contained" size="medium" disabled={!isSignUpButtonEnabled}>
+            회원가입
+          </Button>
+
+        </form>
+      </div>
     </div>
   );
 }

@@ -45,6 +45,14 @@ const getAnimalInfo = async (req, res) => {
         const aniNo = req.params.aniNo;
         
         const animalInfo = combinedData.find(animal => animal.ANIMAL_NO._text === aniNo);
+        
+        console.log(animalInfo.SPCS._text);
+
+        if((animalInfo.SEXDSTN._text) == "W"){
+            (animalInfo.SEXDSTN._text) = "암컷";
+        }else{
+            (animalInfo.SEXDSTN._text) = "수컷";
+        }
 
         if (!animalInfo) {
             return res.status(404).json({ message: 'Animal not found' });

@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 
 function AnimalComponent() {
   const [combinedData, setCombinedData] = useState([]);
+  const [filter, setFilter] = useState('all'); // 필터 상태 추가
+  const [dogCount, setDogCount] = useState(0); // 강아지 수 카운트 상태 추가
+  const [catCount, setCatCount] = useState(0); // 고양이 수 카운트 상태 추가
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,37 +15,70 @@ function AnimalComponent() {
         const animalResponse = await fetcher('GET', '/animal/animal');
         const combinedData = animalResponse || [];
 
+        // 각 필터에 해당하는 동물 수 세기
+        const dogCount = combinedData.filter(animal => animal.SPCS._text === 'DOG').length;
+        const catCount = combinedData.filter(animal => animal.SPCS._text === 'CAT').length;
+
+        setDogCount(dogCount);
+        setCatCount(catCount);
         setCombinedData(combinedData);
-        } catch (error) {
+      } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, []); // 빈 배열로 설정하여 한 번만 실행되도록
+
+
+
 
   return (
-    <div>
-      <h1>서울 동물복지센터</h1>
+    <div className='body-container'>
+      <h1>서울 동물복지센터 보호현황</h1>
+
+      <div className='filter-button'>
+        <button
+          className={filter === 'all' ? 'active' : ''}
+          onClick={() => setFilter('all')}
+        >
+          전체 {combinedData.length}마리
+        </button>
+        <button
+          className={filter === 'DOG' ? 'active' : ''}
+          onClick={() => setFilter('DOG')}
+        >
+          강아지 {dogCount}마리
+        </button>
+        <button
+          className={filter === 'CAT' ? 'active' : ''}
+          onClick={() => setFilter('CAT')}
+        >
+          고양이 {catCount}마리
+        </button>
+      </div>
+
       <div className="animal-container">
-        {combinedData.map(animal => (
-          <div key={animal.ANIMAL_NO._text} className="animal-item">
-            <Link to={`/animal/view?aniNo=${animal.ANIMAL_NO._text}&curPage=1`}>
-              <div className="flag-area"></div>
-              <div className="thumb">
-                {animal.PHOTOS && (
-                  <img
-                    src={`https://${animal.PHOTOS[0]}`}
-                    alt={`${animal.NM._text} 이미지`}
-                  />
-                )}
-              </div>
-              <div className="text">
-                <strong className="title">{animal.NM._text}</strong>
-              </div>
-            </Link>
-          </div>
-        ))}
+        {combinedData
+          .filter(animal => filter === 'all' || animal.SPCS._text === filter) // 필터링 적용
+          .map(animal => (
+            <div key={animal.ANIMAL_NO._text} className="animal-item">
+              <Link to={`/animal/view?aniNo=${animal.ANIMAL_NO._text}&curPage=1`}>
+                <div className="flag-area"></div>
+                <div className="thumb">
+                  {animal.PHOTOS && (
+                    <img
+                      src={`https://${animal.PHOTOS[0]}`}
+                      alt={`${animal.NM._text} 이미지`}
+                    />
+                  )}
+                </div>
+                <div className="text">
+                  <strong className="title">{animal.NM._text}</strong>
+                </div>
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );

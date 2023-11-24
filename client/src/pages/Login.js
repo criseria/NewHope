@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import useLogin from '../hooks/useLogin';
 import { useAuth } from '../contexts/AuthContext';
+import '../pages/Login.css';
+import { Link } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function LoginPage() {
     const Login = useLogin();
@@ -39,14 +43,37 @@ function LoginPage() {
             width: '100%', height: '100vh'
         }}>
             <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={onSubmitHandler}>
-                <label>아이디</label>
-                <input type='text' value={userId} onChange={onIdHandler} />
-                <label>비밀번호</label>
-                <input type='password' value={Password} onChange={onPasswordHandler} />
-                <br />
-                <button type="submit">
-                    Login
-                </button>
+                <div className='login-container'>
+                    <h1>로그인하세요</h1>
+                    <label className='text'>다양한 봉사활동티켓을 구매 할 수 있어요!</label>
+                    <div className='input-id'>
+                        <TextField
+                            helperText="Please enter your Id"
+                            id="demo-helper-text-misaligned"
+                            label="아이디"
+                            type='text'
+                            value={userId}
+                            onChange={onIdHandler}
+                        />
+                    </div>
+                    <p></p>
+                    <div className='input-pw'>
+                        <TextField
+                            helperText="Please enter your Password"
+                            id="demo-helper-text-misaligned"
+                            label="비밀번호"
+                            type='password'
+                            value={Password}
+                            onChange={onPasswordHandler}
+                        />
+                    </div>
+                    <br />
+                    <Button type="submit" variant="contained" size="medium">
+                        Login
+                    </Button>
+
+                    <label className='label-text'>NewHope가 처음이신가요? <Link to='/register'>회원가입</Link></label>
+                </div>
             </form>
         </div>
     )

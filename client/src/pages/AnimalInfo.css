@@ -1,23 +1,192 @@
-
+*{
+    text-decoration: none;
+}
 
 .slick-slide img {
     object-fit: cover;
-    height: 500px;
     width: 100%;
+    height: 400px;
     box-sizing: border-box;
 }
 
 .slick-slider {
-    width: 50%;
+    width: 100%;
     height: 500px;
 }
 
 .slick-next {
+    top: 40%;
     z-index: 999;
     right: 15px;
 }
 
 .slick-prev {
+    top: 40%;
     z-index: 999;
     left: 15px;
+}
+
+.slick-dots {
+    bottom: 100px;
+}
+
+.animal-info-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.slider-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.details-container {
+    width: 40%;
+}
+
+.additional-info-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.label-container {
+    width: 48%;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+table,
+th,
+td {
+    font-size: 20px;
+    border: 3px solid #ddd;
+}
+
+th,
+td {
+    padding: 20px;
+    text-align: center;
+}
+
+td{
+    font-weight: bold;
+}
+
+th {
+    background-color: #594a41;
+    color: #fff;
+}
+
+.video-introduction {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.introduction {
+    margin-bottom: 20px;
+}
+
+.video-url {
+    width: 50%;
+}
+
+.additional-info-container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.animal-concern {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    line-height: 180%;
+}
+
+.button{
+    min-width: 240px;
+    height: 50px;
+    background-color: #009d8f;
+    color: #fff;
+    border-radius: 25px;
+    margin: 0 auto;
+    line-height: 50px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.button-container{
+    text-align: center;
+}
+
+.animal-name{
+    font-family: "nanumsquare";
+    font-weight: 600;
+    font-size: 40px;
+    color: #333333;
+}
+
+.animal-info-manage{
+    padding-bottom: 40px;
+}
+
+.animal-info-manage dl dt{
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    height: 26px;
+    background-color: #fff;
+    border: 2px solid #594a41;
+    border-radius: 13px;
+    padding: 0 10px;
+    line-height: 24px;
+}
+
+.animal-info-manage dd{
+    display: inline-block;
+    float: left;
+    line-height: 26px;
+}
+
+.animal-info-bio{
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.3);
+}
+
+.layout-col {
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.animal-info-bio dl{
+    display: block;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    font-size: 15px;
+    color: #555555;
+}
+
+h3{
+    margin-bottom: 20px;
 }
