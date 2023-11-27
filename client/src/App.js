@@ -10,6 +10,8 @@ import DeleteAccount from './pages/DeleteAccount';
 import PasswordVerification from './pages/PasswordVerification';
 import Animal from './pages/Animal';
 import AnimalInfo from './pages/AnimalInfo';
+import FindId from './pages/FindId';
+import FindPw from './pages/FindPw';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path='/passwordVerification' element={<PasswordVerification />} />
             <Route path='/animal' element={<Animal />}></Route>
             <Route path='/animal/view' element={<AnimalInfo />} />
+            <Route path='/FindId' element={<FindId />} />
+            <Route path='/FindPw' element={<FindPw />} />
           </Routes>
         </AuthProvider>
       </Router>

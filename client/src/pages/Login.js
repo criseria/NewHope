@@ -73,6 +73,8 @@ function LoginPage() {
                     </Button>
 
                     <label className='label-text'>NewHope가 처음이신가요? <Link to='/register'>회원가입</Link></label>
+                    <Link to='/FindId'>아이디찾기</Link>
+                    <Link to='/FindPw'>비밀번호찾기</Link>
                 </div>
             </form>
         </div>

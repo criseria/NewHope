@@ -1,5 +1,5 @@
 const express = require('express');
-const { login, register, getUserInfo , editProfile , passwordVerification, deleteAccount , checkDuplicate , emailAuth } = require('../controllers/auth.controller');
+const { login, register, getUserInfo, editProfile, passwordVerification, deleteAccount, checkDuplicate, emailAuth, findId, resetPassword } = require('../controllers/auth.controller');
 
 const router = express.Router()
 
@@ -10,6 +10,8 @@ router.post("/login", login);
 router.get("/Mypage", getUserInfo)
 router.put('/Mypage/editProfile', editProfile);
 router.post('/passwordVerification', passwordVerification);
-router.delete('/Mypage/DeleteAccount' , deleteAccount);
+router.delete('/Mypage/DeleteAccount', deleteAccount);
+router.post('/findId', findId);
+router.put('/resetPassword', resetPassword)
 
 module.exports = router

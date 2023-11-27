@@ -19,7 +19,6 @@ function Register() {
     userName: '',
     userId: '',
     userPassword: '',
-    passwordConfirm: '',
     userEmail: '',
     userPostcode: '',
     userAddress: '',
@@ -31,7 +30,6 @@ function Register() {
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [passwordMatchError, setPasswordMatchError] = useState('');
   const [isSignUpButtonEnabled, setIsSignUpButtonEnabled] = useState(false);
   const navigate = useNavigate();
 
@@ -63,7 +61,6 @@ function Register() {
   };
 
   const handleInputChange = (e) => {
-    console.log(formData.userPassword, formData.passwordConfirm);
     const { name, value } = e.target;
 
     setFormData({ ...formData, [name]: value });
@@ -72,12 +69,6 @@ function Register() {
       validatePassword(formData.userPassword, formData.passwordConfirm);
     } else if (name === 'userEmail') {
       validateEmail(value);
-    }
-
-    if (name === 'passwordConfirm' && !value) {
-      setPasswordMatchError('비밀번호를 확인해주세요.');
-    } else {
-      setPasswordMatchError('');
     }
   };
 
@@ -89,13 +80,6 @@ function Register() {
       setPasswordError('비밀번호는 4~12자리 사이의 영문과 숫자로 이루어져야 합니다.');
     } else {
       setPasswordError('');
-    }
-
-    // 비밀번호와 비밀번호 확인 필드가 모두 비어 있지 않고, 값이 다를 때 에러를 표시
-    if (password && confirmPassword && password !== confirmPassword) {
-      setPasswordMatchError('비밀번호가 일치하지 않습니다.');
-    } else {
-      setPasswordMatchError('');
     }
   };
 
@@ -166,8 +150,6 @@ function Register() {
       alert('주소를 입력해주세요.');
     } else if (!formData.userPhoneNum) {
       alert('핸드폰 번호를 입력해주세요.');
-    } else if (passwordMatchError) {
-      alert('비밀번호를 확인해주세요.');
     } else {
       try {
         const res = await fetcher('post', '/auth/register', {
@@ -214,18 +196,6 @@ function Register() {
             />
             <p></p>
             <span style={{ color: 'red' }}>{passwordError}</span>
-          </div>
-          <p></p>
-          <div className="form-group">
-            <TextField
-              id="demo-helper-text-misaligned"
-              label="비밀번호 확인"
-              type='password'
-              name="passwordConfirm"
-              value={formData.passwordConfirm}
-              onChange={handleInputChange}
-            />
-            <span style={{ color: 'red' }}>{passwordMatchError}</span>
           </div>
           <p></p>
           <div className="form-group">
@@ -321,14 +291,6 @@ function Register() {
             />
           </div>
           <p></p>
-          {/* <button
-            className="btn btn-warning"
-            style={{ float: 'right' }}
-            type="submit"
-            disabled={!isSignUpButtonEnabled}
-          >
-            회원가입
-          </button> */}
           <Button type="submit" variant="contained" size="medium" disabled={!isSignUpButtonEnabled}>
             회원가입
           </Button>

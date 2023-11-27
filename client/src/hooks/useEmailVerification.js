@@ -5,6 +5,7 @@ const useEmailVerification = () => {
     const [verificationCode, setVerificationCode] = useState('');
     const [isVerificationSent, setIsVerificationSent] = useState(false);
     const [isCodeVerified, setIsCodeVerified] = useState(false);
+    const [isCodeSent, setIsCodeSent] = useState(false);
 
     const generateVerificationCode = () => {
         const generatedCode = Math.floor(100000 + Math.random() * 900000);
@@ -19,6 +20,7 @@ const useEmailVerification = () => {
                 const serverVerificationCode = res.authNum;
                 setVerificationCode(serverVerificationCode);
                 setIsVerificationSent(true);
+                setIsCodeSent(true);
             } else {
                 console.error('서버에서 인증 코드를 받아오지 못했습니다.');
                 alert('이메일 발송에 실패했습니다.');

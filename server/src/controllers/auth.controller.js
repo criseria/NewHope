@@ -258,5 +258,48 @@ const emailAuth = async (req, res) => {
   });
 };
 
+// 아이디 찾기
+const findId = async (req, res) => {
+  const { userEmail } = req.body;
 
-module.exports = { register, login, getUserInfo, logout, editProfile, passwordVerification, deleteAccount, checkDuplicate, emailAuth };
+  try {
+    const user = await userModel.findOne({ userEmail });
+
+    if (user) {
+      res.status(200).json({ ok: true, userId: user.userId });
+    } else {
+      res.status(404).json({ ok: false, message: '해당 이메일에 등록된 사용자가 없습니다.' });
+    }
+  } catch (error) {
+    console.error('Error in findId:', error);
+    res.status(500).json({ ok: false, message: '서버 오류', error: error.message });
+  }
+};
+
+// 비밀번호 찾기
+const resetPassword = async (req, res) => {
+  const { userId, newPassword } = req.body;
+
+  try {
+    // 사용자가 존재하는지 확인
+    const user = await userModel.findOne({ userId });
+
+    if (!user) {
+      return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+    }
+
+    // 비밀번호 해싱 (10은 salt rounds를 나타냅니다.)
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // 비밀번호 업데이트
+    user.userPassword = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
+  } catch (error) {
+    res.status(500).json({ error: '서버 오류', message: error.message });
+  }
+};
+
+
+module.exports = { register, login, getUserInfo, logout, editProfile, passwordVerification, deleteAccount, checkDuplicate, emailAuth, findId, resetPassword };
