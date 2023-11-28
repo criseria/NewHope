@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import useEmailVerification from '../hooks/useEmailVerification';
 import { fetcher } from '../utils/fetcher';
 import { Link, useNavigate } from 'react-router-dom';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import '../pages/FindId.css';
 
 function FindId() {
@@ -103,8 +104,11 @@ function FindId() {
                             아이디 찾기
                         </Button>
                         <p></p>
-                        <Link to='/'>Home</Link>
-                        <Link to='/FindPw'>비밀번호 찾기</Link>
+
+                        <ButtonGroup variant="text" aria-label="text button group">
+                            <Button><Link to='/'>Home</Link></Button>
+                            <Button><Link to='/FindPw'>비밀번호 찾기</Link></Button>
+                        </ButtonGroup>
                     </div>
                 </form>
             </div>

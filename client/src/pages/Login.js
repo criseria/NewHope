@@ -5,6 +5,7 @@ import '../pages/Login.css';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 function LoginPage() {
     const Login = useLogin();
@@ -68,13 +69,17 @@ function LoginPage() {
                         />
                     </div>
                     <br />
-                    <Button type="submit" variant="contained" size="medium">
-                        Login
-                    </Button>
+                    <div className='login_btn'>
+                        <Button type="submit" variant="contained" size="medium">
+                            Login
+                        </Button>
+                    </div>
 
                     <label className='label-text'>NewHope가 처음이신가요? <Link to='/register'>회원가입</Link></label>
-                    <Link to='/FindId'>아이디찾기</Link>
-                    <Link to='/FindPw'>비밀번호찾기</Link>
+                    <ButtonGroup variant="text" aria-label="text button group">
+                        <Link to='/FindId'><Button>아이디찾기</Button></Link>
+                        <Link to='/FindPw'><Button>비밀번호찾기</Button></Link>
+                    </ButtonGroup>
                 </div>
             </form>
         </div>

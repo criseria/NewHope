@@ -8,7 +8,7 @@
 
 .login-container .text {
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 70px;
     margin-top: -20px;
 }
 
@@ -22,20 +22,31 @@
     padding: 58px 100px 46px;
 }
 
-.login-container Button{
-    float: right;
-}
-
-.label-text{
+.label-text {
     text-align: center;
-    margin-top: 70px;
+    margin-top: 60px;
+    margin-bottom: 20px;
 }
 
-.login-container .MuiTextField-root{
+.login-container .MuiTextField-root {
     width: 100%;
 }
 
 .input-id,
-.input-pw{
+.input-pw {
+    margin-top: 15px;
+}
+
+.login-container .MuiButton-root{
+    width: 200px;
+    padding: 13px 16px;
+    margin-top: 15px;
+}
+
+
+.login_btn .MuiButton-root {
+    transform: translate(50%, 50%);
+    width: 200px;
+    padding: 13px 16px;
     margin-top: 15px;
 }

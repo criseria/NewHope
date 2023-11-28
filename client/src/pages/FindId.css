@@ -28,3 +28,7 @@
     width: 70%;
     margin-bottom: 15px;
 }
+
+a:visited{
+    color: rgb(26, 115, 232);
+}
