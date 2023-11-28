@@ -26,10 +26,10 @@ function BoardCreate() {
   const [content, setContent] = useState('');
   const [userInfo, setUserInfo] = useState(null);
   const [userId , setUserId] = useState('');
+  const [boardDate , setBoardDate] = useState('');
   const navigate = useNavigate();
   
-  // const { setBoardData } = useBoardData();
-
+  const [img, setImg] = useState();
 
   const body = {
     categoryId: categoryId,
@@ -63,25 +63,7 @@ function BoardCreate() {
   console.log(body);
 
 
-
-
-  useEffect(() => {
-    const boardDataList = async () => {
-      try{
-        // const body = await fetcher('get', '/board')
-      }
-      catch(error){
-
-      }
-    };
-    boardDataList();
-  }, []);
-
-
-
-  
-
-  const HandleSubmit =  () => {
+  const HandleSubmit = () => {
     
     if (emptyError) {
       alert('모든 문항을 다 작성해주세요.');
@@ -111,6 +93,7 @@ function BoardCreate() {
   
   
   return (<>
+    <br/>
     <h2 align="center">글 작성</h2>
     <div className="voc-view-wrapper">
       <div className="voc-view-row">
@@ -135,7 +118,9 @@ function BoardCreate() {
 
       {/* <div className="voc-view-row">
         <label>사진 첨부</label>
-        <input onChange={(event) => setEmail(event.target.value)}></input>
+        <input onChange={(event) => setImg(event.target.value)}></input>
+        <br/>
+        <button>첨부</button>
       </div> */}
       <button className="voc-view-go-list-btn" onClick={() => HandleSubmit({ body })}>등록</button>
 

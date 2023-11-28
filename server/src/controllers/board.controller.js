@@ -1,7 +1,5 @@
 // const { default: BoardCreate } = require('../../../client/src/pages/BoardCreate');
-// const boardModel = require('../models/boardModel');
 const axios = require('axios');
-
 const boardModel = require("../models/boardModel");
 
 
@@ -24,4 +22,30 @@ const create = async(req, res) => {
     }   
 };
 
-module.exports = { create };
+const list = async(req, res) => {
+
+    try {        
+        const boards = await boardModel.find();
+
+        res.status(200).json(boards);
+      } catch (error) {
+        console.log(error);
+        res.status(401).json({ message : '가져올 정보가 없습니다.' });
+      }
+    };
+
+
+    
+const update = async (req, res) => {
+
+
+}
+
+
+
+const clear = async (req, res) => {
+
+}
+
+
+module.exports = { create, list, update, clear };

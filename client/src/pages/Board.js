@@ -7,58 +7,52 @@ import CommonTableRow from '../components/CommonTableRow';
 
 import { Link, Route } from 'react-router-dom';
 import BoardHeader from '../components/BoardHeader'; 
-
-// import { useBoardData } from '../path-to-context';
+import { fetcher } from '../utils/fetcher';
 
 
 function GetData() {
-  const [data, setData] = useState({});
-  // useEffect(() => {
-  //   axios.get('/board').then((response)=> {
-  //     setData(response.data);
-  //   })
-  // }, []);
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetcher('get', '/board', { withCredentials: true })
+        setData(response.data);
+      } catch(error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const item1 = (Object.values(data)).map((board) => (
-    <CommonTableRow key={board.id}>
-      <CommonTableColumn>{board.id}</CommonTableColumn>
-      <CommonTableColumn>
-        <Link to={`/board/${board.id}`}>
-          {board.title}
-        </Link>
-      </CommonTableColumn>
-      <CommonTableColumn>{board.createdAt}</CommonTableColumn>
-      <CommonTableColumn>{board.username}</CommonTableColumn>
-    </CommonTableRow>
-  ));
-
-  return item1;
+  return Array.isArray(data) ? data : [];
 }
 
 function Board() {
-  const item = GetData();
+  const items = GetData();
 
-  // const { boardData } = useBoardData();
+  console.log(items);
 
-  // const item = boardData.map((board) => (
-  //   <CommonTableRow key={board.id}>
-  //     <CommonTableColumn>{board.id}</CommonTableColumn>
-  //     <CommonTableColumn>
-  //       <Link to={`/board/${board.id}`}>
-  //         {board.title}
-  //       </Link>
-  //     </CommonTableColumn>
-  //     <CommonTableColumn>{board.createdAt}</CommonTableColumn>
-  //     <CommonTableColumn>{board.username}</CommonTableColumn>
-  //   </CommonTableRow>
-  // ));
-
-  return (<>
+  return (
+  <>
     <BoardHeader></BoardHeader>
-    <CommonTable headersName={['글번호', '제목', '등록일', '작성자']}>
-      {item}
+    <CommonTable headersName={['글번호', '분류', '제목', '등록일', '작성자']}>
+      {items.map((board) => (
+            <CommonTableRow key={board.id}>
+              {/* <CommonTableColumn>{board.id}</CommonTableColumn> */}
+              <CommonTableColumn>{board.categoryId}</CommonTableColumn>
+              <CommonTableColumn>
+                <Link to={`/board/${board.id}`}>
+                  {board.title}
+                </Link>
+              </CommonTableColumn>
+              <CommonTableColumn>{board.content}</CommonTableColumn>
+              <CommonTableColumn>{board.username}</CommonTableColumn>
+            </CommonTableRow>
+          ))} 
     </CommonTable>
-  </>);
+  </>
+  );
 }
   
 export default Board;

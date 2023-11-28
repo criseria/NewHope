@@ -60,3 +60,6 @@ app.listen(port, function () {
 })
 
 
+app.post('/board', (req, res) => {
+  // Handle POST logic here
+});
