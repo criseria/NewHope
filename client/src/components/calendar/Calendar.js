@@ -55,7 +55,10 @@ const Calendar = ({ year, date, month, schedule }) => {
           </div> :
           ''}
       </div>
-      {/* <p className='calendar__txt'>
+    </section>
+  );
+}
+{/* <p className='calendar__txt'>
         {msg <= 0 ?
           <>
             이미 종료되었습니다.
@@ -66,8 +69,4 @@ const Calendar = ({ year, date, month, schedule }) => {
             </>
         }
       </p> */}
-    </section>
-  );
-}
-
 export default Calendar;

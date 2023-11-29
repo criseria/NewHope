@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Title from '../text/Title'
 import Text from '../text/Text'
 import CenterImg from '../image/CenterImg'
