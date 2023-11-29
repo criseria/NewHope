@@ -11,9 +11,6 @@ import Cart from './pages/Cart'
 import NotFound from "./pages/NotFound";
 import Order from "./pages/Order";
 import OrderSuccessfully from './pages/OrderSuccessfully'
-import FindId from './pages/FindId';
-import FindPw from './pages/FindPw';
-import Chatbot from './components/chat-bot';
 
 import MyPage from './pages/Mypage';
 import { AuthProvider } from './contexts/AuthContext';
@@ -28,7 +25,9 @@ import Procedure from './pages/Procedure';
 import Intro from './pages/Intro';
 import Board from './pages/Board';
 import BoardCreate from './pages/BoardCreate';
-// import BoardAuthLayout from './components/BoardAuthLayout';
+import FindId from './pages/FindId';
+import FindPw from './pages/FindPw';
+import Chatbot from './components/ChatBot';
 
 function App() {
   return (
@@ -76,7 +75,7 @@ function App() {
             {/* Board End */}
             <Route path="/notfound" element={<NotFound />} />
           </Routes>
-          <Chatbot></Chatbot>
+          <Chatbot />
         </AuthProvider>
       </Router>
     </div >
