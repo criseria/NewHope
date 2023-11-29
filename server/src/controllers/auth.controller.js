@@ -8,7 +8,7 @@ const register = async (req, res) => {
     if (findUser) return console.log('이미 등록된 아이디')
 
     const user = new userModel(userData);
-    // await user.save();
+    await user.save();
     res.status(200).json({ message: '회원가입 성공' });
   } catch (error) {
     res.status(500).json({ error: '서버 오류', message: error.message });

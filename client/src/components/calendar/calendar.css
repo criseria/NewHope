@@ -1,0 +1,20 @@
+.calendar__calendar-section{width:100%; display: flex; flex-direction: column; box-sizing: border-box; max-width: 300px;}
+.calendar__calendar-wrap{padding: 12px; max-width: 300px; width:100%; box-sizing: border-box; box-shadow: 0 0 1px #787878; border-radius: 4px;}
+.calendar__date-wrap{display:flex; user-select: none; flex-wrap:wrap; width:100%;}
+.calendar__calendar-title{display:flex; justify-content: center; font-weight: bold; }
+.calendar__calendar-title > span + span {margin-left: 8px;}
+.calendar__date-wrap > div{width:calc(100% /7); font-weight: bold; font-size: 12px; color:#787878;text-align: center;}
+.calendar__date-name{border-bottom: 1px solid #f1f1f1; line-height: 24px; padding: 8px 0;}
+.calendar__date-num{position: relative; top:0;  padding-bottom: calc(100% / 7);}
+.calendar__date-num.active .calendar__date-num-,.calendar__date-num.target .calendar__date-num-{color:#ffffff; font-weight: bold;}
+.calendar__date-num.active::before{display:block;position:absolute; content:"";transform: translate(-50%,-50%); top:50%; left:50%; background-size: 200% 200%; background-image: linear-gradient(45deg,#ff4c8a,#ff8d8d,#ff4d4d); width:70%;height:70%; border-radius: 4px; box-shadow: 0 2px 4px #ff4d4d;}
+/* .calendar__date-num.active::after{display:block;position:absolute; content:"오늘";font-size:10px;transform: translateX(-50%); left:50%; background-color: #ffffff; font-weight: bold; width:70%; color:#ff4d4d;border-radius: 4px; box-shadow: 0 2px 4px #ff4d4d;} */
+.calendar__date-num.target::before{display:block;position:absolute; content:"";transform: translate(-50%,-50%); top:50%; left:50%; background-size: 200% 200%; background-image: linear-gradient(45deg,#4c8aff,#8d8dff,#4d4dff); width:70%;height:70%; border-radius: 4px; box-shadow: 0 2px 4px #4d4dff;}
+.calendar__date-num-{position: absolute; color:#ababab; top:50%; left:50%; transform: translate(-50%,-50%);}
+
+.calendar__txt{padding:12px 4px; max-width: 300px; color:#787878; width:100%; box-sizing: border-box;}
+.calendar__txt span{color:#4d4dff; font-weight: bold;}
+
+@media screen and (max-width:768px){
+  .calendar__calendar-section{align-items: center; max-width: none; padding-bottom: 24px;}
+}

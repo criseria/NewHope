@@ -6,7 +6,13 @@ const productSchema = new mongoose.Schema({
   productImage: { type: String, default: '' },
   productPrice: { type: Number, required: true },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
-  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }]
+  schedule: { type: Date },
+  year: { type: Number, required: true },
+  month: { type: Number, required: true },
+  date: { type: Number, required: true },
+  address: { type: String },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+  category: { type: String, default: '기타' }
 }, { timestamps: true, collection: 'products' });
 
 module.exports = mongoose.model("products", productSchema);
