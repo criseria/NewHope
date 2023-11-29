@@ -6,6 +6,7 @@ function Intro() {
     return (
         <div className="App">
             <br></br>
+            <div className="title"></div>
             <div doz_type="inside" className="inside">
                 <h3>NH란</h3>
                 <p>'NH'란 'New Hope'의 줄임말로 동물과 사람 모두에게 새로운 희망을 주겠다는 의미입니다.</p>

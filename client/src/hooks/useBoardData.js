@@ -13,7 +13,7 @@ const useBoardData = () => {
     useEffect(() => {
         const boardDataList = async () => {
         try{
-            const boardData = await fetcher('get', '/board/boardcreate', { withCredentials: true });
+            const boardData = await fetcher('get', '/board', { withCredentials: true });
                 setCategoryId(boardData.categoryId);
                 setTitle(boardData.title);
                 setUserName(boardData.userName);
@@ -25,7 +25,7 @@ const useBoardData = () => {
         };
         boardDataList();
     }, []);
-
+}
 
 // const updateBoardData = async () => {
 //     try{
@@ -64,5 +64,3 @@ const useBoardData = () => {
 // };
 
 export default useBoardData;
-
- 

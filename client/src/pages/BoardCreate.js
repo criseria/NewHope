@@ -56,6 +56,7 @@ function BoardCreate() {
         console.error('사용자 정보를 가져오는 중 오류 발생:', error);
       }
     };
+
     fetchUserInfo();
 
   }, []);
@@ -63,7 +64,7 @@ function BoardCreate() {
   console.log(body);
 
 
-  const HandleSubmit = () => {
+  const HandleSubmit = async () => {
     
     if (emptyError) {
       alert('모든 문항을 다 작성해주세요.');
@@ -76,7 +77,7 @@ function BoardCreate() {
 
     } else {
       try {
-        const res =  fetcher('post', '/board/board/boardcreate', body);
+        const res = await fetcher('post', '/board/board/boardcreate', body);
         console.log(res);
 
         // setBoardData((prevData) => [...prevData, res.data]);
@@ -122,8 +123,8 @@ function BoardCreate() {
         <br/>
         <button>첨부</button>
       </div> */}
-      <button className="voc-view-go-list-btn" onClick={() => HandleSubmit({ body })}>등록</button>
-
+      <button className="voc-view-go-list-btn" onClick={HandleSubmit}>등록</button>
+      {/* () => HandleSubmit({ body }) */}
     </div>
   </>);
 }

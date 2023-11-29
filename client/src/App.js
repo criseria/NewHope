@@ -15,6 +15,8 @@ import Procedure from './pages/Procedure';
 import Intro from './pages/Intro';
 import Board from './pages/Board';
 import BoardCreate from './pages/BoardCreate';
+import BoardUpdate from './pages/BoardUpdate';
+import BoardList from './pages/BoardList';
 // import BoardAuthLayout from './components/BoardAuthLayout';
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
             {/* <Route element={<BoardAuthLayout />}> */}
               <Route path='/board/boardcreate' element={<BoardCreate />}  />
             {/* </Route> */}
+            <Route path="/board/boardupdate/:vocId" component={BoardUpdate} />
+            <Route path="/board/boardlist" component={BoardList} />
           </Routes>
         </AuthProvider>
       </Router>
