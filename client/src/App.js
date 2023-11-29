@@ -12,7 +12,7 @@ import Animal from './pages/Animal';
 import AnimalInfo from './pages/AnimalInfo';
 import FindId from './pages/FindId';
 import FindPw from './pages/FindPw';
-import Chatbot from './components/chat-bot';
+import Chatbot from './components/ChatBot';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
             <Route path='/FindId' element={<FindId />} />
             <Route path='/FindPw' element={<FindPw />} />
           </Routes>
-          <Chatbot></Chatbot>
+          <Chatbot />
         </AuthProvider>
       </Router>
     </div >
