@@ -1,12 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import './calendar.css';
 
 const Calendar = ({ year, date, month, schedule }) => {
   const [isDetail, setIsDetail] = useState(true)
   const years = new Date().getFullYear()
-  const months = new Date().getMonth() + 1
-  const days = new Date().getDate()
-  const today = new Date().getDay()
 
   const msg = (new Date(year, month - 1, date) - new Date()) / (1000 * 60 * 60 * 24)
 

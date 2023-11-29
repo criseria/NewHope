@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { fetcher } from '../utils/fetcher'
 import IrTitle from '../components/text/IrTitle'
-import Title from '../components/text/Title'
-import Text from '../components/text/Text'
 import ProductCard from '../components/product/ProductCard'
 import Container from '../components/container/Container'
 

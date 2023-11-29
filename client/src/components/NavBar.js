@@ -20,6 +20,10 @@ const NavBar = () => {
   return (
     <div>
       <Link to="/animal">유기동물소개</Link>
+      <Link to='/mainpage'> 메인</Link>
+      <Link to='/intro'> 소개</Link>
+      <Link to='/board'> 게시판</Link>
+      <Link to="/animal"> 유기동물소개</Link>
       <p></p>
       <Link to="/register">회원가입</Link>
       <p></p>
@@ -29,10 +33,10 @@ const NavBar = () => {
           <button onClick={handleLogout}>로그아웃</button>
         </>
       ) : (
-        <Link to="/login">
-          로그인
-        </Link>
-      )}
+          <Link to="/login">
+            로그인
+          </Link>
+        )}
     </div>
   );
 };

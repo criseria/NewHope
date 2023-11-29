@@ -13,5 +13,7 @@ router.post('/passwordVerification', passwordVerification);
 router.delete('/Mypage/DeleteAccount', deleteAccount);
 router.post('/findId', findId);
 router.put('/resetPassword', resetPassword)
+router.delete('/Mypage/DeleteAccount', deleteAccount);
+router.get('/getUserInfo', getUserInfo);
 
 module.exports = router

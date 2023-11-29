@@ -27,7 +27,6 @@ const productDetail = async (req, res) => {
   const { id } = req.params
   const targetProduct = await productModel.findById(id).populate('owner')
   if (!targetProduct) return res.status(404).send('찾을 수 없는 페이지')
-  console.log(targetProduct._id)
   const targetCategory = await productModel.find({ category: targetProduct.category, _id: { $nin: targetProduct._id }, schedule: { $gt: new Date() } }).sort({ createAt: -1 }).limit(4).skip()
   res.send({ targetProduct, targetCategory })
 }

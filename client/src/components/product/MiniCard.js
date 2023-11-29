@@ -4,12 +4,10 @@ import Text from '../text/Text'
 import CenterImg from '../image/CenterImg'
 import Time from '../text/Time'
 import { Link } from 'react-router-dom'
-import { onLike } from '../../pages/ProductDetail'
 
 import './productcard.css'
 
-const MiniCard = ({ _id, productName, productDescription, productImage, productPrice, owner, createdAt, updatedAt, isLike, username, year, month, date, address = '' }) => {
-
+const MiniCard = ({ _id, productName, productDescription, productImage, year, month, date, address = '' }) => {
   return (
     <div className='product__mini-card-wrap'>
       <Link className='product__mini-card' to={`/product/${_id}`}>

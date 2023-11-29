@@ -15,7 +15,7 @@ function MyPage() {
         <p>{`상세주소 : ${userDetailAddress}`}</p>
         <p>{`핸드폰번호 : ${userPhoneNum}`}</p>
       </div>
-      
+
       <div className="sidebar">
         <Link to="/passwordVerification">정보 수정</Link>
         <Link to="/Mypage/DeleteAccount">회원 탈퇴</Link>

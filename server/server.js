@@ -58,4 +58,6 @@ app.listen(port, function () {
   console.log(`${port} 포트`);
 })
 
-
+app.post('/board', (req, res) => {
+  // Handle POST logic here
+});

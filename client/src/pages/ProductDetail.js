@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router';
 import { fetcher } from '../utils/fetcher'
 import Text from '../components/text/Text';
@@ -7,11 +7,9 @@ import Time from '../components/text/Time';
 import Title from '../components/text/Title';
 import IrTitle from '../components/text/IrTitle';
 import MiniCard from '../components/product/MiniCard';
-import IrText from '../components/text/IrText';
 import Calendar from '../components/calendar/Calendar';
 import useLogin from '../hooks/useLogin'
 import CenterImg from '../components/image/CenterImg'
-import Container from '../components/container/Container'
 import { Link } from 'react-router-dom'
 import ProductQuantity from '../components/ProductQuantity'
 

@@ -5,3 +5,45 @@
 body{color:#343434;}
 
 a{text-decoration: none; color:inherit;}
+
+ /* Mainpage 메인사진 캐러셀 */
+ .slidercontents {
+  padding: 20%;
+  width: 100%;
+  background-image: url(../src/image/mainimg1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+.slidercontents1 {
+  padding: 20%;
+  width: 100%;
+  background-image: url(../src/image/mainimg3.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+/* 소개 페이지 */
+.content {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.blockquote {
+  display: block;
+  padding: 50px 20px;
+  text-align: center;
+  font-family: "nanumsquare";
+  font-weight: 600;
+  font-size: 24px;
+  color: #594a41;
+}
