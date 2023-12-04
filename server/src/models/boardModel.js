@@ -7,7 +7,6 @@ var boardSchema = new Schema({
     content: { type: String, required: true },
     userName: { type: String, required: true },
     boardDate: {type: Date, default: Date.now()},
-    // comments: [commentSchema]
 });
 
 module.exports = mongoose.model('boards', boardSchema);

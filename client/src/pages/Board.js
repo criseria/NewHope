@@ -1,58 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-import CommonTable from '../components/CommonTable';
-import CommonTableColumn from '../components/CommonTableColumn';
-import CommonTableRow from '../components/CommonTableRow';
-
-import { Link, Route } from 'react-router-dom';
-import BoardHeader from '../components/BoardHeader'; 
+import BoardHeader from '../components/BoardHeader';
+import { Link } from 'react-router-dom';
 import { fetcher } from '../utils/fetcher';
 
-
-function GetData() {
+function Board() {
   const [data, setData] = useState([]);
-  
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetcher('get', '/board', { withCredentials: true })
-        setData(response.data);
-      } catch(error) {
+        const res = await fetcher('get', '/board/board', { withCredentials: true });
+        console.log(res);
+
+        const processedData = res.map(item => ({
+          _id: item._id,
+          userName: item.userName,
+          title: item.title,
+          categoryId: item.categoryId,
+        }));
+
+        setData(processedData);
+      } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, []);
 
-  return Array.isArray(data) ? data : [];
-}
-
-function Board() {
-  const items = GetData();
-
-  console.log(items);
+  // 선택한 카테고리에 기반하여 게시물 필터링
+  const filteredData = selectedCategory === 'all' ? data : data.filter(item => item.categoryId === selectedCategory);
 
   return (
-  <>
-    <BoardHeader></BoardHeader>
-    <CommonTable headersName={['글번호', '분류', '제목', '등록일', '작성자']}>
-      {items.map((board) => (
-            <CommonTableRow key={board.id}>
-              {/* <CommonTableColumn>{board.id}</CommonTableColumn> */}
-              <CommonTableColumn>{board.categoryId}</CommonTableColumn>
-              <CommonTableColumn>
-                <Link to={`/board/${board.id}`}>
-                  {board.title}
-                </Link>
-              </CommonTableColumn>
-              <CommonTableColumn>{board.content}</CommonTableColumn>
-              <CommonTableColumn>{board.username}</CommonTableColumn>
-            </CommonTableRow>
-          ))} 
-    </CommonTable>
-  </>
+    <>
+      <div className="board-container">
+        <h2>게시판 목록</h2>
+        <Link to='/board/boardcreate'>
+            <button align="right">
+              글 작성
+            </button>
+        </Link>
+        <div>
+          <button onClick={() => setSelectedCategory('all')}>전체보기</button>
+          <button onClick={() => setSelectedCategory('1')}>봉사후기</button>
+          <button onClick={() => setSelectedCategory('2')}>입양후기</button>
+        </div>
+
+        <ul>
+          {filteredData.map((item, index) => (
+            <li key={index}>
+              <Link to={`/board/${item._id}`}>
+                <label>제목 : {item.title}</label>
+                <p></p>
+                <label>작성자 : {item.userName}</label>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
-  
+
 export default Board;

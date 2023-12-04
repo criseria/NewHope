@@ -3,7 +3,7 @@ import item from '../components/item';
 import './BoardUpdate';
 import { fetcher } from '../utils/fetcher';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 
 function GetCategory() {
@@ -26,10 +26,8 @@ function BoardCreate() {
   const [content, setContent] = useState('');
   const [userInfo, setUserInfo] = useState(null);
   const [userId , setUserId] = useState('');
-  const [boardDate , setBoardDate] = useState('');
   const navigate = useNavigate();
   
-  const [img, setImg] = useState();
 
   const body = {
     categoryId: categoryId,
@@ -78,9 +76,6 @@ function BoardCreate() {
       try {
         const res =  fetcher('post', '/board/board/boardcreate', body);
         console.log(res);
-
-        // setBoardData((prevData) => [...prevData, res.data]);
-        
         alert('글 작성이 완료되었습니다.');
         navigate('/board');
         
@@ -102,28 +97,20 @@ function BoardCreate() {
           {categories}
         </select>
       </div>
-
       <div className="voc-view-row">
         <label>제목</label>
         <input onChange={(event) => setTitle(event.target.value)}></input>
       </div>
-      {/* <div className="voc-view-row">
-        <label>작성자</label>
-        <form value={userName} onChange={(event) => setUserName(event.target.value)} readOnly></form>
-      </div> */}
       <div className="voc-view-row">
         <label>내용</label>
         <textarea onChange={(event) => setContent(event.target.value)}></textarea>
       </div>
-
-      {/* <div className="voc-view-row">
-        <label>사진 첨부</label>
-        <input onChange={(event) => setImg(event.target.value)}></input>
-        <br/>
-        <button>첨부</button>
-      </div> */}
+      <div className="voc-view-row">
+        <label>첨부 파일</label>
+        <input type="file" onChange={handleFileChange} />
+      </div>
       <button className="voc-view-go-list-btn" onClick={() => HandleSubmit({ body })}>등록</button>
-
+      <Link to={'/board'}>취소</Link>
     </div>
   </>);
 }
