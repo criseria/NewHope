@@ -7,7 +7,7 @@ const BoardContent = () => {
   const [boardContent, setBoardContent] = useState({});
   const { isLoggedIn } = useAuth();
   const { id } = useParams();
-  const [userId , setUserId] = useState('');
+  const [userId, setUserId] = useState('');
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const BoardContent = () => {
 
     if (confirmDelete) {
       try {
-        await fetcher('delete', `/board/delete/${id}`, null, { withCredentials: true });
+        await fetcher('delete', `/board/board/delete/${id}`, null, { withCredentials: true });
         console.log('게시물이 성공적으로 삭제되었습니다.');
         window.location.href = '/board';
       } catch (error) {
@@ -59,6 +59,9 @@ const BoardContent = () => {
       <p>작성자: {boardContent.userName}</p>
       <p>작성날짜: {boardContent.boardDate}</p>
       <p>내용: {boardContent.content}</p>
+
+
+        <img src={`http://localhost:8080/${boardContent.file}`} alt="Uploaded" style={{ maxWidth: '100%' }} />
 
       {/* 작성자와 로그인된 사용자 정보의 userName이 일치할 때만 보이도록 설정 */}
       {userId === boardContent.userName && (

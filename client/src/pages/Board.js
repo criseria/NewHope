@@ -18,6 +18,7 @@ function Board() {
           userName: item.userName,
           title: item.title,
           categoryId: item.categoryId,
+          file: item.file,
         }));
 
         setData(processedData);
@@ -50,6 +51,8 @@ function Board() {
           {filteredData.map((item, index) => (
             <li key={index}>
               <Link to={`/board/${item._id}`}>
+                <img src={`http://localhost:8080/${item.file}`} alt="Uploaded" style={{ maxWidth: '200px' }} />
+                <p></p>
                 <label>제목 : {item.title}</label>
                 <p></p>
                 <label>작성자 : {item.userName}</label>

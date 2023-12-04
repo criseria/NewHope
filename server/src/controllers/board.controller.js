@@ -1,24 +1,26 @@
-// const { default: BoardCreate } = require('../../../client/src/pages/BoardCreate');
-const axios = require('axios');
 const boardModel = require("../models/boardModel");
 
-
-// 글 작성
 const create = async (req, res) => {
-  const body = req.body;
-
   try {
+    // 파일 업로드 여부 확인
+    if (req.file) {
+      // 파일 처리, 예를 들어 데이터베이스나 파일 시스템에 저장
+      // 파일의 세부 정보는 req.file에서 사용 가능
+      console.log('Uploaded file:', req.file);
+      // 파일 경로를 body에 추가
+      req.body.filePath = req.file.path.replace(/\\/g, '/');
+    }
+
+    // 기존의 요청 본문에서 필요한 데이터 추출
     const { categoryId, title, content, userName } = req.body;
 
-    console.log(categoryId, title, content, userName);
-    const board = new boardModel(body);
+    // 새로운 boardModel 인스턴스 생성 및 저장
+    const board = new boardModel({ categoryId, title, content, userName, file: req.body.filePath });
     await board.save();
     res.status(201).json({ message: '글 작성이 완료되었습니다.' });
-  }
-
-  catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "서버 오류", message: error.message });
+  } catch (error) {
+    console.error('에러 발생:', error);
+    res.status(500).json({ error: '서버 오류', message: error.message });
   }
 };
 
@@ -99,4 +101,4 @@ const clear = async (req, res) => {
 };
 
 
-module.exports = { create, list, content, clear , update };
+module.exports = { create, list, content, clear, update };
