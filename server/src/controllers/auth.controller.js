@@ -151,7 +151,7 @@ const editProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
     }
-
+    console.log('Updated data received:', updatedData);
     // 업데이트할 datalist
     user.userName = updatedData.userName || user.userName;
     user.userEmail = updatedData.userEmail || user.userEmail;
@@ -159,11 +159,6 @@ const editProfile = async (req, res) => {
     user.userAddress = updatedData.userAddress || user.userAddress;
     user.userDetailAddress = updatedData.userDetailAddress || user.userDetailAddress;
     user.userPhoneNum = updatedData.userPhoneNum || user.userPhoneNum;
-
-    // 비밀번호를 변경할 때에는 안전한 방법으로 업데이트
-    if (updatedData.userPassword) {
-      user.userPassword = updatedData.userPassword;
-    }
 
     await user.save();
     req.session.user = user;

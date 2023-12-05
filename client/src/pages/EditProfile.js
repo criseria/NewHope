@@ -1,6 +1,8 @@
 import React from 'react';
 import useMyPageData from '../hooks/useMypage';
 import { Link } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const EditProfile = () => {
   const {
@@ -20,34 +22,62 @@ const EditProfile = () => {
   } = useMyPageData();
 
   return (
-    <div>
+    <div className="container">
       <h2>회원정보 수정 화면 입니다.</h2>
-      <label>
-        이름:
-        <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
-      </label>
-      <label>
-        이메일:
-        <input type="text" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
-      </label>
-      <label>
-        우편번호:
-        <input type="text" value={userPostcode} onChange={(e) => setUserPostcode(e.target.value)} />
-      </label>
-      <label>
-        주소:
-        <input type="text" value={userAddress} onChange={(e) => setUserAddress(e.target.value)} />
-      </label>
-      <label>
-        상세주소:
-        <input type="text" value={userDetailAddress} onChange={(e) => setUserDetailAddress(e.target.value)} />
-      </label>
-      <label>
-        핸드폰번호:
-        <input type="text" value={userPhoneNum} onChange={(e) => setUserPhoneNum(e.target.value)} />
-      </label>
-      <button onClick={updateUserInfo}>수정</button>
-      <Link to={'/Mypage'}>돌아가기</Link>
+      <TextField
+        label="이름"
+        type="text"
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="이메일"
+        type="text"
+        value={userEmail}
+        onChange={(e) => setUserEmail(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="우편번호"
+        type="text"
+        value={userPostcode}
+        onChange={(e) => setUserPostcode(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="주소"
+        type="text"
+        value={userAddress}
+        onChange={(e) => setUserAddress(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="상세주소"
+        type="text"
+        value={userDetailAddress}
+        onChange={(e) => setUserDetailAddress(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="핸드폰번호"
+        type="text"
+        value={userPhoneNum}
+        onChange={(e) => setUserPhoneNum(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <Button variant="contained" size="medium" onClick={updateUserInfo} style={{ marginTop: '16px' }}>
+        수정
+      </Button>
+      <Link to={'/Mypage'} style={{ marginLeft: '8px' }}>
+        돌아가기
+      </Link>
     </div>
   );
 };

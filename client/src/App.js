@@ -56,7 +56,7 @@ function App() {
             {/* Auth Start */}
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/Mypage' element={<MyPage />} />
+            <Route path="/Mypage" element={<MyPage />} />
             <Route path='/Mypage/edit' element={<EditProfile />} />
             <Route path='/Mypage/DeleteAccount' element={<DeleteAccount />} />
             <Route path='/passwordVerification' element={<PasswordVerification />} />
