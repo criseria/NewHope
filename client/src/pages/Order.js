@@ -8,9 +8,14 @@ import useLogin from '../hooks/useLogin'
 import { Link } from 'react-router-dom'
 import CartItem from '../components/CartItem'
 import OrderContainer from '../components/container/OrderContainer'
+import { useUserId } from '../hooks/useUserId'
+import useMyPageData from '../hooks/useMypage'
+
 import './cart.css'
 const Order = () => {
-  const username = '6554b0620567c42fd1c5c405'
+  const { username, getUserId } = useUserId()
+  const { userName, userEmail, userPostcode, userAddress, userDetailAddress, userPhoneNum } = useMyPageData();
+
   const buyer_name = '테스트'
   const buyer_tel = '01000000000'
   const buyer_email = 'buyer_email'
@@ -29,8 +34,11 @@ const Order = () => {
   }
 
   useEffect(() => {
+    getUserId()
+    if (username === undefined) return
+    if (username === '') { return navigate('/login') }
     getProduct()
-  }, [])
+  }, [username])
 
   const amount = cartItem.reduce((init, curr) => init + (curr.quantity * curr.itemId.productPrice), 0)
 
@@ -38,7 +46,7 @@ const Order = () => {
     if (!window.IMP) return;
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
-    IMP.init('imp86703361'); // 가맹점 식별코드
+    IMP.init(process.env.REACT_APP_SELLER_CODE); // 가맹점 식별코드
 
     /* 2. 결제 데이터 정의하기 */
     // PG사 코드표

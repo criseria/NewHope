@@ -10,10 +10,11 @@ import Text from '../components/text/Text'
 import CartItem from '../components/CartItem'
 import OrderConatiner from '../components/container/OrderContainer'
 import FixedModal from '../components/modal/FixedModal'
+import { useUserId } from '../hooks/useUserId'
+
 import './cart.css'
 
 const Cart = () => {
-  const username = '6554b0620567c42fd1c5c405'
   const hasLogin = useLogin()
   const txtRef = useRef(null)
   const cartRef = useRef(null)
@@ -25,6 +26,8 @@ const Cart = () => {
   const [hasAll, setHasAll] = useState(false)
   const filterItem = cartItem.filter(i => i.checked === true)
   const filterItemPrice = filterItem.reduce((init, curr) => init + (curr.quantity * curr.itemId.productPrice), 0)
+  const { username, getUserId } = useUserId()
+
   const getProduct = async () => {
     const res = await fetcher('get', `/product/cart/${username}`)
     setCartItem(res.cartItems)
@@ -36,8 +39,11 @@ const Cart = () => {
   }
 
   useEffect(() => {
+    getUserId()
+    if (username === undefined) return
+    if (username === '') { return navigate('/login') }
     getProduct()
-  }, [])
+  }, [username])
 
   const onMinusHanlde = async (id) => {
     const targetItem = cartItem.findIndex(i => i.itemId._id === id)

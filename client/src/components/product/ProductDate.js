@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ProductDate = ({ text, id, year, month, date, setYear, setMonth, setDate }) => {
-  console.log(year, month, date)
   const currentYear = new Date().getFullYear()
   const yearOption = Array(5).fill(0).map((_, idx) => currentYear + idx)
   const monthOption = Array(12).fill(0).map((_, idx) => idx + 1)
