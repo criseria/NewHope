@@ -1,11 +1,19 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router'
 import './footer.css'
 
 export const pages = [{ kor: "홈", route: '/' }, { kor: "유기 동물 소개", route: '/animal' }, { kor: "게시판", route: '/board' }, { kor: "봉사 활동 티켓", route: '/product' }]
 
 const Footer = () => {
+  const { pathname } = useLocation()
+  const [page, setPage] = useState('')
+  useEffect(() => {
+    setPage((prev) => pathname)
+  }, [pathname])
+  console.log(page)
   return (
-    <footer>
+    <footer style={{ paddingBottom: page === '/cart' ? "100px" : "auto" }}>
       <section className='footer_section'>
         <div className={'footer_page_wrap'}>
           <p className=''>사이트 내 페이지 목록</p>
