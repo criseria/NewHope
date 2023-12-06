@@ -18,7 +18,6 @@ export const onLike = async (username, id) => {
   // 좋아요, 좋아요 취소
   const like = await fetcher('post', '/product/likes', { username, id })
   const res = like.likes.findIndex(i => i === id) >= 0 ? true : false
-  console.log(res)
   return res
 }
 
@@ -156,12 +155,18 @@ const ProductDetail = () => {
                 <CenterImg src={'https://plus.unsplash.com/premium_photo-1665952050581-4bf02bb5752e?q=80&w=2380&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} padding={40} alt={'이미지'} />
               </div>
             </section>
-            <section className='product_detail-mini-card-section'>
-              <Title text={'곧 종료되는 일정'} gray />
-              <div className='product_detail-mini-card-wrap'>
-                {hasItem.map(i => <MiniCard key={i._id} {...i} isLike={i.likes} />)}
-              </div>
-            </section>
+            {/* 종료되는 일정이 하나라도 있어야 표시 */}
+            {hasItem.length !== 0
+              ?
+              <section className='product_detail-mini-card-section'>
+                <Title text={'곧 종료되는 일정'} gray />
+                <div className='product_detail-mini-card-wrap'>
+                  {hasItem.map(i => <MiniCard key={i._id} {...i} isLike={i.likes} />)}
+                </div>
+              </section>
+              :
+              ""
+            }
           </div>
         </>
         : ''}
