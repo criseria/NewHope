@@ -93,9 +93,6 @@ const Order = () => {
   return (
     <main>
       <OrderContainer>
-        <Link to={'/product'}>
-          Back
-        </Link>
         {cartItem.length !== 0 ?
           <>
             <IrTitle text={'주문 페이지'} />

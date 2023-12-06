@@ -109,7 +109,7 @@ const Cart = () => {
   const selectedItems = async () => {
     // 선택 상품만 구매
     const checkItems = cartItem.filter(i => i.checked === true)
-    if (checkItems.length === 0) return console.log('선택 상품이 없습니다.')
+    if (checkItems.length === 0) return //console.log('선택 상품이 없습니다.')
 
     await fetcher('post', '/product/order', { username, orderItems: checkItems })
     navigate('/order')
@@ -128,7 +128,7 @@ const Cart = () => {
 
   const selectRemove = async () => {
     const checkItems = cartItem.filter(i => i.checked === true).map(i => i.itemId._id)
-    if (checkItems.length === 0) return console.log('선택 상품이 없습니다.')
+    if (checkItems.length === 0) return //console.log('선택 상품이 없습니다.')
 
     for (let i = 0; i < checkItems.length; i++) {
       await onRemoveHandle(checkItems[i])
@@ -146,9 +146,6 @@ const Cart = () => {
   return (
     <main style={{ paddingBottom: `${cartRef.current?.clientHeight || 0}px` }}>
       <OrderConatiner>
-        <Link to={'/product'}>
-          Back
-        </Link>
         {cartItem.length !== 0 ?
           <>
             <IrTitle text={'상품 상세 페이지'} />
