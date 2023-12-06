@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 
 function AnimalComponent() {
   const [combinedData, setCombinedData] = useState([]);
-  const [filter, setFilter] = useState('all'); // 필터 상태 추가
-  const [dogCount, setDogCount] = useState(0); // 강아지 수 카운트 상태 추가
-  const [catCount, setCatCount] = useState(0); // 고양이 수 카운트 상태 추가
-
+  const [filter, setFilter] = useState('all');
+  const [dogCount, setDogCount] = useState(0);
+  const [catCount, setCatCount] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,8 +27,7 @@ function AnimalComponent() {
     };
 
     fetchData();
-  }, []); // 빈 배열로 설정하여 한 번만 실행되도록
-
+  }, []);
 
 
 
@@ -60,7 +58,7 @@ function AnimalComponent() {
 
       <div className="animal-container">
         {combinedData
-          .filter(animal => filter === 'all' || animal.SPCS._text === filter) // 필터링 적용
+          .filter(animal => filter === 'all' || animal.SPCS._text === filter)
           .map(animal => (
             <div key={animal.ANIMAL_NO._text} className="animal-item">
               <Link to={`/animal/view?aniNo=${animal.ANIMAL_NO._text}&curPage=1`}>

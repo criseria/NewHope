@@ -76,13 +76,6 @@ const EditProfile = () => {
         fullWidth
         margin="normal"
       />
-      {/* <Button variant="contained" size="medium" onClick={updateUserInfo} style={{ marginTop: '16px' }}>
-        수정
-      </Button>
-      <Link to={'/Mypage'} style={{ marginLeft: '8px' }}>
-        돌아가기
-      </Link> */}
-
       <div className='Common-btn'>
         <ButtonGroup variant="text" aria-label="text button group">
           <Button type='button' size="medium" onClick={updateUserInfo}>
