@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login';
 import Register from './pages/Register'
 import NavBar from './components/NavBar';
+// import Footer from './components/footer';
 import Product from './pages/Product';
 import ProductDetail from './pages/ProductDetail';
 import ProductCreate from './pages/ProductCreate';
@@ -28,6 +29,8 @@ import BoardCreate from './pages/BoardCreate';
 import FindId from './pages/FindId';
 import FindPw from './pages/FindPw';
 import Chatbot from './components/ChatBot';
+import BoardContent from './pages/BoardContent';
+import BoardUpdate from './pages/BoardUpdate';
 
 function App() {
   return (
@@ -37,6 +40,7 @@ function App() {
           <NavBar />
           <Routes>
             {/* Intro Start*/}
+            <Route path='/' element={<MainPage />} />
             <Route path='/MainPage' element={<MainPage />} />
             <Route path='/procedure' element={<Procedure />} />
             <Route path='/Intro' element={<Intro />} />
@@ -54,7 +58,7 @@ function App() {
             {/* Auth Start */}
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/Mypage' element={<MyPage />} />
+            <Route path="/Mypage" element={<MyPage />} />
             <Route path='/Mypage/edit' element={<EditProfile />} />
             <Route path='/Mypage/DeleteAccount' element={<DeleteAccount />} />
             <Route path='/passwordVerification' element={<PasswordVerification />} />
@@ -70,6 +74,8 @@ function App() {
             {/* Board Start */}
             <Route path='/board' element={<Board />} />
             <Route path='/board/boardcreate' element={<BoardCreate />} />
+            <Route path="/board/:id" element={<BoardContent />} />
+            <Route path="/board/update/:id" element={<BoardUpdate />} />
             {/* <Route element={<BoardAuthLayout />}> */}
             {/* </Route> */}
             {/* Board End */}

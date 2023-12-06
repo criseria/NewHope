@@ -3,20 +3,19 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* 가로 정렬 중앙 정렬 */
   margin: 0 auto;
-  /* 좌우 여백을 자동으로 설정하여 전체를 가운데 정렬 */
+  font-family: 'GmarketSansMedium';
 }
 
 .animal-item {
   width: 23%;
   margin: 20px 2%;
   text-align: center;
-  /* 이미지를 가운데 정렬 */
   padding: 20px 10px 20px 10px;
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'GmarketSansMedium';
 }
 
 .thumb :hover {
@@ -31,7 +30,7 @@
   overflow: hidden;
   border-radius: 8px;
   text-align: center;
-  /* 이미지를 가운데 정렬 */
+  font-family: 'GmarketSansMedium';
 }
 
 .thumb img {
@@ -45,11 +44,13 @@
   width: 100%;
   height: 80%;
   text-align: center;
+  font-family: 'GmarketSansMedium';
 }
 
 .text {
   padding-top: 10px;
   color: #555555;
+  font-family: 'GmarketSansMedium';
 }
 
 
@@ -61,6 +62,7 @@
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
+  font-family: 'GmarketSansMedium';
 }
 
 .filter-button button.active {
@@ -74,8 +76,10 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'GmarketSansMedium';
 }
 
 h1{
   margin-bottom: 20px;
+  font-family: 'GmarketSansMedium';
 }

@@ -1,0 +1,102 @@
+
+.write-heading {
+    font-size: 36px;
+    font-family: 'GmarketSansMedium';
+}
+
+.voc-view-wrapper {
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  .voc-view-row {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  select,
+  input
+  {
+    height: 45px;
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  textarea {
+    height: 200px; 
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  
+  .voc-view-go-list-btn {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .voc-view-go-list-btn:hover {
+    background-color: #45a049;
+  }
+  
+  Link {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #ccc;
+    color: black;
+    border-radius: 5px;
+  }
+  
+  Link:hover {
+    background-color: #ddd;
+  }
+  
+  .voc-view-btn-wrapper {
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: 30px; 
+  }
+  
+  .voc-view-go-list-btn {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 25px; 
+  }
+  
+  .voc-view-go-list-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .voc-view-go-list-link {
+    color: rgb(141, 138, 138);
+    text-decoration: none;
+  }
+  
+  .voc-view-go-list-link:hover {
+    color: rgb(53, 52, 52); 
+  }

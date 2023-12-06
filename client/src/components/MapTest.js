@@ -53,7 +53,7 @@ export default function MapTest() {
 };
       
 
-    return <div id="map" style={{ width: "100vw", height: "50vh" }}>
+    return <div id="map" style={{ width: "100%", height: "50vh" }}>
         
     </div>;
 }
