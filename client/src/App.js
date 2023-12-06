@@ -29,6 +29,8 @@ import BoardCreate from './pages/BoardCreate';
 import FindId from './pages/FindId';
 import FindPw from './pages/FindPw';
 import Chatbot from './components/ChatBot';
+import BoardContent from './pages/BoardContent';
+import BoardUpdate from './pages/BoardUpdate';
 
 function App() {
   return (
@@ -55,7 +57,7 @@ function App() {
             {/* Auth Start */}
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/Mypage' element={<MyPage />} />
+            <Route path="/Mypage" element={<MyPage />} />
             <Route path='/Mypage/edit' element={<EditProfile />} />
             <Route path='/Mypage/DeleteAccount' element={<DeleteAccount />} />
             <Route path='/passwordVerification' element={<PasswordVerification />} />
@@ -71,6 +73,8 @@ function App() {
             {/* Board Start */}
             <Route path='/board' element={<Board />} />
             <Route path='/board/boardcreate' element={<BoardCreate />} />
+            <Route path="/board/:id" element={<BoardContent />} />
+            <Route path="/board/update/:id" element={<BoardUpdate />} />
             {/* <Route element={<BoardAuthLayout />}> */}
             {/* </Route> */}
             {/* Board End */}

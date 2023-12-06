@@ -1,0 +1,64 @@
+.my-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.user-info-table {
+    width: 40%;
+    margin-left: 10%;
+    border-collapse: collapse;
+}
+
+.user-info-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.user-info-table td:first-child {
+    text-align: center;
+}
+
+.user-info-table td:last-child {
+    text-align: left; 
+}
+
+.user-info-table .greeting {
+    text-align: center; 
+}
+
+.greeting strong {
+    display: block;
+    text-align: center;
+}
+
+.sidebar {
+    background-color: #333;
+    padding: 20px;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 300px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-link {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar {
+    background-color: #333;
+    text-align: center;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+}

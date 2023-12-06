@@ -35,9 +35,9 @@ const CloseButton = styled.button`
   position: absolute;
   top: 37px;
   right: 44px;
-  background-color: transparent; // 배경색을 투명으로 설정
-  border: none; // 테두리 제거
-  cursor: pointer; // 포인터 커서 사용
+  background-color: transparent; 
+  border: none;
+  cursor: pointer;
   z-index: 9999;
 `;
 

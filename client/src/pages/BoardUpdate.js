@@ -1,58 +1,71 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { fetcher } from '../utils/fetcher';
 
-import './BoardUpdate.css';
-
-function GetData(vocId) {
-  const [question, setQuestion] = useState({});
-  const [answer, setAnswer] = useState({});
+const BoardUpdate = () => {
+  const { id } = useParams();
+  const [postData, setPostData] = useState({
+    title: '',
+    content: '',
+  });
 
   useEffect(() => {
-    axios.get('http:/localhost:3000/voc/search/'+vocId)
-    .then((response)=> {
-        setQuestion(response.data.question);
-        setAnswer(response.data.answer);
-    })
-  }, []);
+    const fetchPostData = async () => {
+      try {
+        const res = await fetcher('get', `/board/board/${id}`, { withCredentials: true });
+        setPostData({
+          title: res.title,
+          content: res.content,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPostData();
+  }, [id]);
 
-  const item =  (<>
-    <h2 align="center">글 상세정보</h2>
-    <div className="voc-view-wrapper">
-        <div className="voc-view-row">
-            <label>글 번호</label>
-            <label>{ question.id }</label>
-        </div>
-        <div className="voc-view-row">
-            <label>제목</label>
-            <label>{ question.title }</label>
-        </div>
-        <div className="voc-view-row">
-            <label>작성일</label>
-            <label>{ question.createDate }</label>
-        </div>
-        <div className="voc-view-row">
-            <label>내용</label>
-            <div>
-                {
-                question.content
-                }
-            </div>
-        </div>
-    </div></>)
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPostData({ ...postData, [name]: value });
+  };
 
-    return item;
-}
+  const handleUpdatePost = async () => {
+    try {
+      await fetcher('put', `/board/board/update/${id}`, postData, { withCredentials: true });
+      console.log('게시물이 성공적으로 업데이트되었습니다.');
+      window.location.href = `/board/${id}`;
+    } catch (error) {
+      console.error('게시물 업데이트 중 오류 발생:', error);
+    }
+  };
 
-function BoardUpdate() {
-  const{vocId} = useParams();
-  const item = GetData(vocId);
-
-  return (<>
+  return (
     <div>
-        {item}
+      <h2>게시물 수정</h2>
+      <form>
+        <label>제목:</label>
+        <input
+          type="text"
+          name="title"
+          value={postData.title}
+          onChange={handleInputChange}
+        />
+
+        <label>내용:</label>
+        <textarea
+          name="content"
+          value={postData.content}
+          onChange={handleInputChange}
+        />
+
+        <button type="button" onClick={handleUpdatePost}>
+          게시물 업데이트
+        </button>
+
+        <Link to={`/board/${id}`}>돌아가기</Link>
+      </form>
     </div>
-  </>);
-}
-  
+  );
+};
+
 export default BoardUpdate;

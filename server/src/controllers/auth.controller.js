@@ -151,7 +151,7 @@ const editProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
     }
-
+    console.log('Updated data received:', updatedData);
     // 업데이트할 datalist
     user.userName = updatedData.userName || user.userName;
     user.userEmail = updatedData.userEmail || user.userEmail;
@@ -159,11 +159,6 @@ const editProfile = async (req, res) => {
     user.userAddress = updatedData.userAddress || user.userAddress;
     user.userDetailAddress = updatedData.userDetailAddress || user.userDetailAddress;
     user.userPhoneNum = updatedData.userPhoneNum || user.userPhoneNum;
-
-    // 비밀번호를 변경할 때에는 안전한 방법으로 업데이트
-    if (updatedData.userPassword) {
-      user.userPassword = updatedData.userPassword;
-    }
 
     await user.save();
     req.session.user = user;
@@ -238,8 +233,13 @@ const emailAuth = async (req, res) => {
     from: "criseria4212@naver.com",
     // 사용자가 회원가입 페이지에서 입력한 이메일 주소
     to: email,
-    subject: "인증 관련 메일 입니다.",
-    html: `<h1>인증번호를 입력해주세요<br><br><br><br></h1>${number}`,
+    subject: "NewHope에서 보낸 인증 관련 메일 입니다.",
+    html: `<h1>이메일 인증코드<br></h1>
+    <p>유기동물에 관한 정보와 각종 봉사활동에 관련된 정보를 얻을 수 있는 곳.</p>
+    <p>NewHope에 오신 것 을 환영합니다.</p>
+    <p>아래의 인증코드를 입력하시면 가입이 정상적으로 완료됩니다.</p>
+    <h1>${number}</h1>`,
+
   };
 
   smtpTransport.sendMail(mailOptions, (err, response) => {

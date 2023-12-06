@@ -1,25 +1,70 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useMyPageData from '../hooks/useMypage';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { fetcher } from '../utils/fetcher';
+import './Mypage.css';
 
 function MyPage() {
   const { userName, userEmail, userPostcode, userAddress, userDetailAddress, userPhoneNum } = useMyPageData();
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const userId = await fetcher('get', '/auth/getUserInfo');
+        setUserInfo(userId);
+
+        if (!userId.userName) {
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('사용자 정보를 가져오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, [navigate]);
+
+  if (!userInfo) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
-    <div>
-      <div>
-        <p>{`${userName} 님 안녕하세요.`}</p>
-        <p>{`이메일 : ${userEmail}`}</p>
-        <p>{`우편번호 : ${userPostcode}`}</p>
-        <p>{`주소 : ${userAddress}`}</p>
-        <p>{`상세주소 : ${userDetailAddress}`}</p>
-        <p>{`핸드폰번호 : ${userPhoneNum}`}</p>
-      </div>
-
+    <div className="my-page-container">
       <div className="sidebar">
-        <Link to="/passwordVerification">정보 수정</Link>
-        <Link to="/Mypage/DeleteAccount">회원 탈퇴</Link>
+        <Link to="/passwordVerification" className="sidebar-link">정보 수정</Link>
+        <Link to="/Mypage/DeleteAccount" className="sidebar-link">회원 탈퇴</Link>
       </div>
+      <table className="user-info-table">
+        <tbody>
+          <tr>
+            <td colSpan="2" className="greeting"><strong>{`NewHope에 방문해주신 ${userName} 님 안녕하세요~`}</strong></td>
+          </tr>
+          <tr>
+            <td>이메일</td>
+            <td>{userEmail}</td>
+          </tr>
+          <tr>
+            <td>우편번호</td>
+            <td>{userPostcode}</td>
+          </tr>
+          <tr>
+            <td>주소</td>
+            <td>{userAddress}</td>
+          </tr>
+          <tr>
+            <td>상세주소</td>
+            <td>{userDetailAddress}</td>
+          </tr>
+          <tr>
+            <td>핸드폰번호</td>
+            <td>{userPhoneNum}</td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
   );
 }

@@ -5,6 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv')
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const app = express();
 
@@ -46,6 +47,9 @@ mongoose.connect(MONGODB_URL, {
   console.log(err);
 });
 
+// 정적 파일 경로 설정
+app.use('/uploads', express.static('uploads'));
+
 app.get('/', (req, res) => {
   res.send('awd')
 })
@@ -53,7 +57,7 @@ app.get('/', (req, res) => {
 app.use('/', routes);
 
 // 서버 리스닝 
-const port = PORT || 8000
+const port = PORT || 8080
 app.listen(port, function () {
   console.log(`${port} 포트`);
 })

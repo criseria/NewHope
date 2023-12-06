@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const useMyPageData = () => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [userPostcode , setUserPostcode] = useState('');
+  const [userPostcode, setUserPostcode] = useState('');
   const [userAddress, setUserAddress] = useState('');
   const [userDetailAddress, setUserDetailAddress] = useState('');
   const [userPhoneNum, setUserPhoneNum] = useState('');
@@ -31,20 +31,22 @@ const useMyPageData = () => {
 
   const updateUserInfo = async () => {
     try {
-      await setUserName(userName);
-      await setUserEmail(userEmail);
-      await setUserPostcode(userPostcode);
-      await setUserAddress(userAddress);
-      await setUserDetailAddress(userDetailAddress);
-      await setUserPhoneNum(userPhoneNum);
+      setUserName(userName);
+      setUserEmail(userEmail);
+      setUserPostcode(userPostcode);
+      setUserAddress(userAddress);
+      setUserDetailAddress(userDetailAddress);
+      setUserPhoneNum(userPhoneNum);
       // 서버로 수정된 정보를 전송
       const updatedData = await fetcher('put', '/auth/Mypage/editProfile', {
         userName,
         userEmail,
+        userPostcode,
         userAddress,
+        userDetailAddress,
         userPhoneNum
       }, { withCredentials: true });
-
+      
       alert('회원정보가 수정되었습니다.');
       navigate('/Mypage');
       console.log(updatedData); // 서버로부터의 응답을 출력 또는 처리
