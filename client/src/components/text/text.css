@@ -1,0 +1,35 @@
+.text__ir-text{position:absolute;
+  overflow:hidden;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  clip:rect(0,0,0,0);}
+
+.h1__default{font-size: 32px; line-height: 48px;}
+.h2__default{font-size: 24px; line-height: 36px;}
+.h3__default{font-size: 20px; line-height: 30px;}
+.h4__default{font-size: 16px; line-height: 28px;}
+.text__default{
+    font-size:14px; line-height: 24px; color:#343434;
+  }
+
+.text__hidden{
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.text__gray{
+  color: #787878;
+}
+
+.text__small{
+  font-size: 12px; line-height: 20px;
+}
+
+.text__bold{
+  font-weight: bold;
+}
+.text__light{
+  font-weight: normal;
+}
+
+time{display:block;font-size: 12px; line-height: 16px; font-weight: bold; color:#787878; }

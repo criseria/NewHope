@@ -2,12 +2,12 @@ POST http://localhost:8080/auth/register HTTP/1.1
 Content-Type: application/json; charset=UTF-8
 
 {
-    "userName": "test",
-  "userId": "test",
-  "userPassword":"test",
-  "userEmail": "test",
-  "userAddress": "test",
-  "userPhoneNum": "test"
+  "userName": "test1",
+  "userId": "test1",
+  "userPassword":"test1",
+  "userEmail": "test1",
+  "userAddress": "test1",
+  "userPhoneNum": "test1"
 }
 
 ####
@@ -17,4 +17,70 @@ Content-Type: application/json; charset=UTF-8
 {
     "userId": "test",
     "userPassword": "test"
+}
+
+####
+POST http://localhost:8080/product/create HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"6554b0620567c42fd1c5c405", 
+    "productName":"현재 시간3", 
+    "year":2023,
+    "month":12,
+    "date":5,
+    "address":"서울특별시 금천구",
+    "productDescription":"테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트 테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트테스트 텍스트", 
+    "productImage":"https://s.pstatic.net/shopping.phinf/20231109_1/363ace70-bb7f-4397-a521-47cfafad0065.jpg?type=f294_378", 
+    "productPrice":5000
+}
+
+####
+POST http://localhost:8080/product/likes HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"654c8539ee005367bc3b748f", 
+    "id":"6551ce58e51ae01287db3056"}
+
+####
+POST http://localhost:8080/product/cart HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"654c8539ee005367bc3b748f", 
+    "id":"6551dd4a203ecf9758569e8c",
+    "quantity":200}
+
+####
+POST http://localhost:8080/product/order HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"654c8539ee005367bc3b748f",
+    "orderItems":[{
+        "itemId": "6551dd4a203ecf9758569e8c",
+        "quantity": 200
+      },{
+        "itemId": "6551dd28203ecf9758569e81",
+        "quantity": 200
+      }]
+}
+
+###
+POST http://localhost:8080/product/payments HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"654c8539ee005367bc3b748f",
+    "clientPrice":110000000
+    }
+
+###
+POST http://localhost:8080/product/orderlist HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "username":"654c8539ee005367bc3b748f"
+    }
 }

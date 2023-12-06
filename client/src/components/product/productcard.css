@@ -1,0 +1,37 @@
+.product__card-wrap{width:calc(25% - 6px); border-radius: 8px; overflow: hidden; position: relative;}
+/* .product__card-wrap:hover{animation:shadow ease 0.2s; box-shadow: 0 0 2px #787878;} */
+.product__card-wrap:hover .center__img-wrap img{transform:translate(-50%,-50%) scale(1.1); transition: all ease 0.2s;}
+.product__card-wrap button{position: absolute; top: 8px; right:8px; width:32px; height:32px; background-color: rgba(255,255,255,0.4); border-radius: 4px;}
+.product__card-info-wrap{padding:8px 4px; box-sizing: border-box;}
+.product__card-title{font-size: 16px; line-height: 24px; padding-bottom: 4px;}
+.product__card--description-wrap{margin-top:24px; padding:4px; }
+.product__card--description{display: -webkit-box;-webkit-box-orient:vertical; -webkit-line-clamp: 2; line-height: 20px; height:40px; overflow: hidden; text-overflow: ellipsis;}
+.product__card-price{font-weight: bold; font-size: 18px; line-height: 28px; padding-top: 4px;}
+.product__card--address{padding-bottom: 4px;}
+
+.product__mini-card-wrap{width:calc(25% - 6px); padding:8px;box-sizing: border-box; box-shadow: 0 0 2px #cdcdcd; border-radius: 100px;}
+.product__mini-card{width:100%; display:flex; justify-content: space-between; align-items: center;}
+.product__mini-card .center__img-wrap{min-width:68px; max-width: 60px; border-radius: 100px;}
+.product__mini-card-info-wrap{width:calc(100% - 76px)}
+
+/* Create Input */
+.product__create-input-item{display:flex; flex-direction: column;}
+.product__create-input-item label{font-weight: bold; padding-bottom: 4px; color:#787878;}
+.product__create-input-item input{border:0; outline: 0; border-bottom: 1px solid #787878; line-height: 24px;}
+.product__create-date{display:flex; gap:0 8px; margin-top: 8px;}
+.product__create-date select{width:100px; line-height: 24px; height:24px; border:0; border-bottom:1px solid #787878; text-align: center; -webkit-appearance: none; border-radius: 0; outline: 0;}
+
+@media screen and (max-width:768px){
+  .product__card-wrap{width:calc(50% - 4px);}
+  .product__mini-card-wrap{width:calc(50% - 4px);}
+}
+
+@media screen and (max-width:480px){
+  .product__mini-card-wrap{width:100%;}
+}
+
+@keyframes shadow{
+  from{box-shadow: 0 0 2px transparent;}
+  to{box-shadow: 0 0 2px #787878;}
+}
+
