@@ -15,21 +15,15 @@ function MyPage() {
         const userId = await fetcher('get', '/auth/getUserInfo');
         setUserInfo(userId);
 
-        if (!userId.userName) {
-          navigate('/login');
-        }
       } catch (error) {
+        alert('로그인이 필요한 서비스입니다!');
+        navigate('/login')
         console.error('사용자 정보를 가져오는 중 오류 발생:', error);
       }
     };
 
     fetchUserInfo();
   }, [navigate]);
-
-  if (!userInfo) {
-    return <div>Loading...</div>;
-  }
-
 
   return (
     <div className="my-page-container">

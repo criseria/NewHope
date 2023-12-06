@@ -3,6 +3,10 @@ import useMyPageData from '../hooks/useMypage';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import './EditProfile.css'
+import './commonStyle.css';
+
 
 const EditProfile = () => {
   const {
@@ -22,8 +26,8 @@ const EditProfile = () => {
   } = useMyPageData();
 
   return (
-    <div className="container">
-      <h2>회원정보 수정 화면 입니다.</h2>
+    <div className="Edito-container">
+      <h1><strong>EditProfile</strong></h1>
       <TextField
         label="이름"
         type="text"
@@ -72,12 +76,21 @@ const EditProfile = () => {
         fullWidth
         margin="normal"
       />
-      <Button variant="contained" size="medium" onClick={updateUserInfo} style={{ marginTop: '16px' }}>
+      {/* <Button variant="contained" size="medium" onClick={updateUserInfo} style={{ marginTop: '16px' }}>
         수정
       </Button>
       <Link to={'/Mypage'} style={{ marginLeft: '8px' }}>
         돌아가기
-      </Link>
+      </Link> */}
+
+      <div className='Common-btn'>
+        <ButtonGroup variant="text" aria-label="text button group">
+          <Button type='button' size="medium" onClick={updateUserInfo}>
+            수정
+          </Button>
+          <Link to='/Mypage' className="MuiButton-root"><Button>취소</Button></Link>
+        </ButtonGroup>
+      </div>
     </div>
   );
 };

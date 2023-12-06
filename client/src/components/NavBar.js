@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { fetcher } from '../utils/fetcher';
 
 
 
@@ -8,13 +9,17 @@ const NavBar = () => {
   const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    alert("로그아웃 되었습니다.");
-    logout();
-    navigate('/');
-    document.cookie = 'dkfjdkfjaksfjddksjf3232=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    // 쿠키 삭제 후 콘솔로그로 확인
-    // console.log(document.cookie);
+  const handleLogout = async () => {
+
+    try {
+      const data = await fetcher('post', '/auth/logout');
+
+      alert(data.message); 
+      logout(); 
+      navigate('/');
+    } catch (error) {
+      console.error('로그아웃 중 오류 발생:', error);
+    }
   };
 
   return (
@@ -33,10 +38,10 @@ const NavBar = () => {
           <button onClick={handleLogout}>로그아웃</button>
         </>
       ) : (
-          <Link to="/login">
-            로그인
-          </Link>
-        )}
+        <Link to="/login">
+          로그인
+        </Link>
+      )}
     </div>
   );
 };

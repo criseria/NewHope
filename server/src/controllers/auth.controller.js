@@ -105,8 +105,15 @@ const logout = (req, res) => {
       console.error('Error destroying session:', err);
       res.status(500).json({ error: '서버 오류', message: '세션 제거 중 에러 발생' });
     } else {
+      console.log('세션 파괴 성공');
+
       // 클라이언트와 서버 측 캐시 무시 헤더 추가
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.setHeader('Expires', '0');
+      res.setHeader('Pragma', 'no-cache');
       res.setHeader('Cache-Control', 'no-store');
+
+      console.log('Destroyed session:', req.session);
       res.status(200).json({ message: '로그아웃 성공' });
     }
   });
