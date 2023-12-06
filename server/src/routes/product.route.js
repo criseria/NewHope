@@ -1,5 +1,5 @@
 const express = require('express');
-const { product, payments, userOrder, orderSuccessfully, checkedCart, userCart, orderList, deleteCart, productDetail, userLikes, productCreate, likes, cart, order, userOrderSuccessfully } = require('../controllers/product.controller');
+const { product, payments, userOrder, orderSuccessfully, checkedCart, userCart, orderList, deleteCart, productDetail, userLikes, productCreate, likes, cart, order, userOrderSuccessfully, getOid } = require('../controllers/product.controller');
 const { oid, bodyOid } = require('../middlewares/objectIdCheck')
 const productModel = require('../models/productModel')
 
@@ -11,6 +11,7 @@ router.get('/likes/:id', userLikes);
 router.get('/cart/:id', userCart);
 router.get('/order/:id', oid, userOrder)
 router.get('/ordersuccessfully/:id', userOrderSuccessfully)
+router.get('/get/oid', getOid)
 
 router.post('/create', productCreate);
 router.post('/likes', likes);

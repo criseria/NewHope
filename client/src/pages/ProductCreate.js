@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { fetcher } from '../utils/fetcher'
 import IrTitle from '../components/text/IrTitle'
 import ProductInput from '../components/product/ProductInput'
@@ -7,10 +7,12 @@ import Container from '../components/container/Container'
 import { useNavigate } from 'react-router'
 import UploadWidget from '../components/UploadWidget'
 import { Link } from 'react-router-dom'
+import { useUserId } from '../hooks/useUserId'
 
 import './product.css'
 
 const ProductCreate = () => {
+  const navigate = useNavigate()
   const [productName, setProductName] = useState('')
   const [productImage, setProductImage] = useState('')
   const [address, setAddress] = useState('')
@@ -19,11 +21,7 @@ const ProductCreate = () => {
   const [year, setYear] = useState(new Date().getFullYear())
   const [month, setMonth] = useState(new Date().getMonth() + 1)
   const [date, setDate] = useState(new Date().getDate())
-  const navigate = useNavigate()
-  // const [a, setA] = useState('')
-  // const [a, setA] = useState('')
-  // const [a, setA] = useState('')
-  const username = '6554b0620567c42fd1c5c405'
+  const { username, getUserId } = useUserId()
 
   const onSubmitHandle = async (e) => {
     e.stopPropagation()
@@ -36,6 +34,13 @@ const ProductCreate = () => {
     const res = await fetcher('post', '/product/create', { username, productName, year, month, date, address, productDescription, productImage, productPrice })
     return navigate(`/product/${res._id}`)
   }
+
+  useEffect(() => {
+    getUserId()
+    if (username === undefined) return
+    if (username === '') { return navigate('/login') }
+  }, [username])
+
   return (
     <div>
       <Container>

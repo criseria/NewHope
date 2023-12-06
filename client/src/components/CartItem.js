@@ -15,7 +15,7 @@ const CartItem = ({ quantity, itemId, checked, _id, cart = false,
         ?
         <span onClick={onCheckHandle}
           className='cart__cart-check-button'>
-          <img src={checked ? '/check.png' : '/check_outline.png'} />
+          <img src={checked ? '/check.png' : '/check_outline.png'} alt={'체크 표시'} />
         </span>
         : ''}
       <div onClick={onCheckHandle} className={'cart__cart-item-img'}>

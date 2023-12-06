@@ -10,10 +10,11 @@ import Text from '../components/text/Text'
 import CartItem from '../components/CartItem'
 import OrderConatiner from '../components/container/OrderContainer'
 import FixedModal from '../components/modal/FixedModal'
+import { useUserId } from '../hooks/useUserId'
+
 import './cart.css'
 
 const Cart = () => {
-  const username = '6554b0620567c42fd1c5c405'
   const hasLogin = useLogin()
   const txtRef = useRef(null)
   const cartRef = useRef(null)
@@ -25,6 +26,8 @@ const Cart = () => {
   const [hasAll, setHasAll] = useState(false)
   const filterItem = cartItem.filter(i => i.checked === true)
   const filterItemPrice = filterItem.reduce((init, curr) => init + (curr.quantity * curr.itemId.productPrice), 0)
+  const { username, getUserId } = useUserId()
+
   const getProduct = async () => {
     const res = await fetcher('get', `/product/cart/${username}`)
     setCartItem(res.cartItems)
@@ -36,8 +39,11 @@ const Cart = () => {
   }
 
   useEffect(() => {
+    getUserId()
+    if (username === undefined) return
+    if (username === '') { return navigate('/login') }
     getProduct()
-  }, [])
+  }, [username])
 
   const onMinusHanlde = async (id) => {
     const targetItem = cartItem.findIndex(i => i.itemId._id === id)
@@ -103,7 +109,7 @@ const Cart = () => {
   const selectedItems = async () => {
     // 선택 상품만 구매
     const checkItems = cartItem.filter(i => i.checked === true)
-    if (checkItems.length === 0) return console.log('선택 상품이 없습니다.')
+    if (checkItems.length === 0) return //console.log('선택 상품이 없습니다.')
 
     await fetcher('post', '/product/order', { username, orderItems: checkItems })
     navigate('/order')
@@ -122,7 +128,7 @@ const Cart = () => {
 
   const selectRemove = async () => {
     const checkItems = cartItem.filter(i => i.checked === true).map(i => i.itemId._id)
-    if (checkItems.length === 0) return console.log('선택 상품이 없습니다.')
+    if (checkItems.length === 0) return //console.log('선택 상품이 없습니다.')
 
     for (let i = 0; i < checkItems.length; i++) {
       await onRemoveHandle(checkItems[i])
@@ -140,9 +146,6 @@ const Cart = () => {
   return (
     <main style={{ paddingBottom: `${cartRef.current?.clientHeight || 0}px` }}>
       <OrderConatiner>
-        <Link to={'/product'}>
-          Back
-        </Link>
         {cartItem.length !== 0 ?
           <>
             <IrTitle text={'상품 상세 페이지'} />

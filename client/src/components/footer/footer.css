@@ -1,0 +1,14 @@
+footer{padding:36px 0; margin-top: 60px; border-top:1px solid #dddddd; background-color: #fafafa;;}
+footer * {margin:0; padding:0;}
+footer li{list-style:none;}
+.footer_section{padding:12px 0; box-sizing: border-box; max-width: 1200px; margin:0 auto;}
+.footer_page_wrap{padding:0 8px; box-sizing: border-box;}
+.footer_page_wrap + .footer_page_wrap{margin-top: 28px;}
+.footer_page_list{margin-top: 8px;}
+.footer_page_item{padding: 2px 4px; box-sizing: border-box;}
+.footer_sns_list{margin-top: 8px;}
+.footer_sns_item{padding:2px; border-radius: 4px; cursor: pointer;}
+.footer_sns_item:hover{box-shadow: 0 0 2px #787878; transition: all ease 0.3s;}
+.footer_sns_item + .footer_sns_item{margin-left: 4px;}
+.footer_copyright{color:#565656;}
+.footer_copyright + .footer_copyright {margin-top: 4px;}

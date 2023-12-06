@@ -5,8 +5,15 @@ const orderListModel = require('../models/orderListModel')
 const findUser = require('../utils/findUser')
 
 const product = async (req, res) => {
+  const user = req.session.user
+  console.log(user)
   const productList = await productModel.find({ schedule: { $gt: new Date() } })
   res.send(productList)
+}
+
+const getOid = (req, res) => {
+  const username = req.session.user?._id || ''
+  res.send(username)
 }
 
 const productCreate = async (req, res) => {
@@ -217,4 +224,4 @@ const userOrderSuccessfully = async (req, res) => {
 }
 
 
-module.exports = { product, productDetail, payments, productCreate, likes, cart, order, orderList, userLikes, userCart, deleteCart, checkedCart, userOrder, orderSuccessfully, userOrderSuccessfully }
+module.exports = { product, productDetail, payments, productCreate, likes, cart, order, orderList, userLikes, userCart, deleteCart, checkedCart, userOrder, orderSuccessfully, userOrderSuccessfully, getOid }

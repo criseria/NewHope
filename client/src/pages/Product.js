@@ -3,14 +3,13 @@ import { fetcher } from '../utils/fetcher'
 import IrTitle from '../components/text/IrTitle'
 import ProductCard from '../components/product/ProductCard'
 import Container from '../components/container/Container'
-
+import { useUserId } from '../hooks/useUserId'
 import './product.css'
 
 const Product = () => {
   const [product, setProduct] = useState([])
   const [isLike, setIsLike] = useState([])
-
-  const username = '6554b0620567c42fd1c5c405'
+  const { username, getUserId } = useUserId()
 
   const getProduct = async () => {
     const res = await fetcher('get', '/product')
@@ -22,8 +21,10 @@ const Product = () => {
   }
 
   useEffect(() => {
+    getUserId()
+    if (username === undefined) return
     getProduct()
-  }, [])
+  }, [username])
 
   return (
     <div>

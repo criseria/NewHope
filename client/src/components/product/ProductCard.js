@@ -30,7 +30,7 @@ const ProductCard = ({ _id, productName, productDescription, productImage, produ
           <Text text={productDescription} cls={'product__card--description'} gray />
           <Text text={`${productPrice.toLocaleString('ko-KR')}원`} cls={'product__card-price'} />
         </div>
-        <button onClick={(e) => onClickHandle(e, username, _id)}>
+        <button onClick={username !== '' ? (e) => onClickHandle(e, username, _id) : (e) => { e.preventDefault(); }}>
           {!hasLike ? '🤍' : '❤️'}
         </button>
       </Link>

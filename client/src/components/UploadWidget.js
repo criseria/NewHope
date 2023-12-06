@@ -5,13 +5,11 @@ const UploadWidget = ({ value, setValue }) => {
   const cloudinaryRef = useRef()
   const widgetRef = useRef()
   useEffect(() => {
-    console.log(process.env.REACT_APP_CLOUDINARY_NAME, process.env.REACT_APP_UPLOAD_PRESET)
     cloudinaryRef.current = window.cloudinary
     widgetRef.current = cloudinaryRef.current.createUploadWidget({
       cloudName: process.env.REACT_APP_CLOUDINARY_NAME,
       uploadPreset: process.env.REACT_APP_UPLOAD_PRESET
     }, function (error, result) {
-      console.log('결', result)
       if (result.event === 'success') {
         setValue(result.info.secure_url)
       }

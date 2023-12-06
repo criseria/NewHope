@@ -11,20 +11,18 @@ import Calendar from '../components/calendar/Calendar';
 import useLogin from '../hooks/useLogin'
 import CenterImg from '../components/image/CenterImg'
 import { Link } from 'react-router-dom'
+import { useUserId } from '../hooks/useUserId'
 import ProductQuantity from '../components/ProductQuantity'
 
 export const onLike = async (username, id) => {
   // 좋아요, 좋아요 취소
   const like = await fetcher('post', '/product/likes', { username, id })
   const res = like.likes.findIndex(i => i === id) >= 0 ? true : false
-  console.log(res)
   return res
 }
 
 const ProductDetail = () => {
   const { id } = useParams()
-
-  const username = '6554b0620567c42fd1c5c405'
   const hasLogin = useLogin()
   const txtRef = useRef(null)
   const navigate = useNavigate()
@@ -34,6 +32,8 @@ const ProductDetail = () => {
   const [msg, setMsg] = useState(false)
   const [product, setProduct] = useState({})
   const [hasItem, setHasItem] = useState([])
+  const { username, getUserId } = useUserId()
+
   const getProduct = async () => {
     // if (id.replace(/[^0-9,a-f]/g, '').length !== 24) {
     //   return navigate('/')
@@ -51,7 +51,6 @@ const ProductDetail = () => {
     }
   }
 
-  console.log(hasItem)
   const onPayments = async () => {
     // 바로 구매 버튼
     await fetcher('post', '/product/order', { username, orderItems: [{ quantity, itemId: product }] })
@@ -69,8 +68,10 @@ const ProductDetail = () => {
   }
 
   useEffect(() => {
+    getUserId()
+    if (username === undefined) return
     getProduct()
-  }, [id])
+  }, [id, username])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -136,13 +137,13 @@ const ProductDetail = () => {
                       </button>
                     </div>
                     : ''}
-                  <button className={'product__detail-outline-button'} onClick={() => toggleLike(username, id)}>
-                    {!isLike ? '🤍좋아요' : '❤️좋아요'}
+                  <button className={'product__detail-outline-button'} onClick={username !== "" ? () => toggleLike(username, id) : () => { alert('로그인이 필요합니다.') }} >
+                    {!isLike ? '🤍 좋아요' : '❤️ 좋아요'}
                   </button>
-                  <button className={'product__detail-outline-button'} onClick={onCart}>
+                  <button className={'product__detail-outline-button'} onClick={username !== "" ? onCart : () => { alert('로그인이 필요합니다.') }}>
                     장바구니
                   </button>
-                  <button className={'product__detail-fill-button'} onClick={onPayments}>
+                  <button className={'product__detail-fill-button'} onClick={username !== "" ? onPayments : () => { alert('로그인이 필요합니다.') }}>
                     바로구매
                   </button>
                 </div>
@@ -154,12 +155,18 @@ const ProductDetail = () => {
                 <CenterImg src={'https://plus.unsplash.com/premium_photo-1665952050581-4bf02bb5752e?q=80&w=2380&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} padding={40} alt={'이미지'} />
               </div>
             </section>
-            <section className='product_detail-mini-card-section'>
-              <Title text={'곧 종료되는 일정'} gray />
-              <div className='product_detail-mini-card-wrap'>
-                {hasItem.map(i => <MiniCard key={i._id} {...i} isLike={i.likes} />)}
-              </div>
-            </section>
+            {/* 종료되는 일정이 하나라도 있어야 표시 */}
+            {hasItem.length !== 0
+              ?
+              <section className='product_detail-mini-card-section'>
+                <Title text={'곧 종료되는 일정'} gray />
+                <div className='product_detail-mini-card-wrap'>
+                  {hasItem.map(i => <MiniCard key={i._id} {...i} isLike={i.likes} />)}
+                </div>
+              </section>
+              :
+              ""
+            }
           </div>
         </>
         : ''}

@@ -4,10 +4,13 @@ import OrderContainer from '../components/container/OrderContainer'
 import CartItem from '../components/CartItem'
 import Title from '../components/text/Title'
 import { Link } from 'react-router-dom'
+import { useUserId } from '../hooks/useUserId'
+import { useNavigate } from 'react-router'
 
 const OrderSucessfully = () => {
+  const navigate = useNavigate()
   const [orderList, setOrderList] = useState({})
-  const username = '6554b0620567c42fd1c5c405'
+  const { username, getUserId } = useUserId()
 
   const getOrder = async () => {
     const res = await fetcher('get', `/product/ordersuccessfully/${username}`)
@@ -15,8 +18,11 @@ const OrderSucessfully = () => {
   }
 
   useEffect(() => {
+    getUserId()
+    if (username === undefined) return
+    if (username === '') { return navigate('/login') }
     getOrder()
-  }, [])
+  }, [username])
 
   const orderLength = orderList.orderItems?.length
   return (
