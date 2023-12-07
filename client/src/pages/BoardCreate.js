@@ -4,7 +4,8 @@ import './BoardUpdate';
 import { fetcher } from '../utils/fetcher';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import './BoardCreate.css'
+import Footer from "../components/Footer";
 
 function GetCategory() {
   let [category, setCategory] = useState(item);
@@ -84,9 +85,11 @@ function BoardCreate() {
   return (
     <>
       <br/>
-      <h2 align="center">글 작성</h2>
+      <h2 align="center" className='write-heading'>글 작성</h2>
       <div className="voc-view-wrapper">
         <div className="voc-view-row">
+          <br/>
+          <br/>
           <label>후기 유형</label>
           <select onChange={(event) => setCategoryId(parseInt(event.target.value))}>
             {categories}
@@ -104,8 +107,18 @@ function BoardCreate() {
           <label>첨부 파일</label>
           <input type="file" onChange={handleFileChange} />
         </div>
-        <button className="voc-view-go-list-btn" onClick={handleSubmit}>등록</button>
-        <Link to={'/board'}>취소</Link>
+        <div className="voc-view-btn-wrapper">
+          <button className="voc-view-go-list-btn" onClick={handleSubmit}>등록</button>
+          <button><Link to={'/board'} style={{color:'gray'}} className="voc-view-go-list-link">취소</Link></button>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Footer/>
       </div>
     </>
   );

@@ -1,0 +1,65 @@
+/* BoardContent.css */
+
+.content-container {
+  width: 70%;
+  margin: 0 auto;
+  text-align: center; 
+}
+
+.content-container h2,
+.content-container img,
+.content-container p {
+  margin-bottom: 20px; 
+}
+
+.content-container h2 {
+  font-size: 36px;
+}
+
+.content-container p {
+  text-align:inherit;
+}
+
+.content-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.content-btn {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px;
+}
+
+.content-btn button,
+.content-btn a {
+  margin-left: 10px;
+}
+
+.content-btn button {
+  padding: 10px;
+  background-color: #d9534f;
+  color: #292828;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.content-btn button:hover {
+  background-color: #c9302c;
+}
+
+.content-btn a {
+  text-decoration: none;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #a09f9f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.content-btn a:hover {
+  background-color: #ffffff;
+  color: #292828;
+}

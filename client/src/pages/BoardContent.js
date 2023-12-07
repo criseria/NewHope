@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetcher } from '../utils/fetcher';
 import { useAuth } from '../contexts/AuthContext';
+import './BoardContent.css';
+import Footer from '../components/Footer';
 
 const BoardContent = () => {
   const [boardContent, setBoardContent] = useState({});
@@ -53,26 +55,44 @@ const BoardContent = () => {
   };
 
   return (
-    <div>
+    <div className='content-container'>
+      <br/>
       <h2>게시물 상세 페이지</h2>
+      <br/>
+
+      <img src={`http://localhost:8080/${boardContent.file}`} alt="Uploaded" style={{ maxWidth: '100%' }} />
+      <br/>
+
       <p>제목: {boardContent.title}</p>
       <p>작성자: {boardContent.userName}</p>
-      <p>작성날짜: {boardContent.boardDate}</p>
+      <p>작성 날짜: {boardContent.boardDate}</p>
       <p>내용: {boardContent.content}</p>
+      <br/>
 
-
-        <img src={`http://localhost:8080/${boardContent.file}`} alt="Uploaded" style={{ maxWidth: '100%' }} />
-
-      {/* 작성자와 로그인된 사용자 정보의 userName이 일치할 때만 보이도록 설정 */}
-      {userId === boardContent.userName && (
-        <button type="button" onClick={handleDeletePost}>
-          게시물 삭제
-        </button>
-      )}
-
-      <Link to={`/board/update/${id}`}>수정하기</Link>
-      <Link to={'/board'}>목록으로</Link>
+       
+    <div className='content-btn'>
+        {/* 작성자와 로그인된 사용자 정보의 userName이 일치할 때만 보이도록 설정 */}
+        {userId === boardContent.userName && (
+          <button type="button" onClick={handleDeletePost}>
+            게시물 삭제 
+          </button>
+        )}
+        <Link to={`/board/update/${id}`}>수정하기</Link>
+        <Link to={'/board'}>목록으로</Link>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <Footer/>
     </div>
+    
   );
 };
 

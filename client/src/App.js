@@ -40,6 +40,7 @@ function App() {
           <NavBar />
           <Routes>
             {/* Intro Start*/}
+            <Route path='/' element={<MainPage />} />
             <Route path='/MainPage' element={<MainPage />} />
             <Route path='/procedure' element={<Procedure />} />
             <Route path='/Intro' element={<Intro />} />

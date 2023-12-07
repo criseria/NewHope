@@ -1,0 +1,93 @@
+/* NavBar.css */
+
+.navbar-main{
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(255, 253, 253);
+  padding: 7px;
+  font-family: 'GmarketSansMedium';
+}
+
+.logo-container {
+display: flex;
+align-items: center;
+}
+
+.logo-container img {
+margin-right: 10px; 
+}
+
+
+
+.mnavbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  padding: 7px;
+  font-size: 18px;
+  font-family: 'GmarketSansMedium';
+}
+
+.navbar a {
+  font-family: 'GmarketSansMedium';
+  color: black;
+  text-decoration-color: none;
+}
+
+.logoutbtn {
+  font-family: 'GmarketSansMedium';
+  color: black;
+  text-decoration-color: none;
+}
+
+.nav-links {
+  display: none;
+}
+
+.nav-links.open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: rgb(227, 253, 214);
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-links a {
+  margin: 10px 0;
+}
+
+.menu-icon {
+display: flex;
+flex-direction: column;
+cursor: pointer;
+}
+
+.bar {
+width: 25px;
+height: 3px;
+background-color: #333;
+margin: 6px 0;
+transition: 0.4s;
+}
+
+.bar.open {
+transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+
+@media screen and (max-width: 600px) {
+.navbar a {
+  display: none; 
+}
+
+.navbar h1 {
+  display: inline-block;
+}
+}

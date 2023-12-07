@@ -17,6 +17,7 @@
   border-radius: 5px;
   height: 600px;
   width: 600px;
+  font-family: 'GmarketSansMedium';
 }
 
 .container{
@@ -29,6 +30,7 @@
   padding: 58px 100px 46px;
   margin: 0 auto;
   transform:translate(0%,10%);
+  font-family: 'GmarketSansMedium';
 }
 
 .register{
@@ -36,10 +38,10 @@
   align-items: center;
 }
 
-
 .container .MuiTextField-root{
-width: 100%;
-margin-top: 15px;
+  width: 100%;
+  margin-top: 15px;
+  font-family: 'GmarketSansMedium';
 }
 
 .container .form-id .MuiTextField-root,
@@ -47,19 +49,23 @@ margin-top: 15px;
 .container .form-verificationCode .MuiTextField-root,
 .container .form-postcode .MuiTextField-root
 {
-width: 75%;
+  width: 75%;
+  font-family: 'GmarketSansMedium';
 }
 
 .container .form-address .MuiTextField-root{
-width:100%;
+  width:100%;
+  font-family: 'GmarketSansMedium';
 }
 
 .container .MuiButton-root{
-float: right;
-padding: 13px 16px;
-margin-top: 16px;
+  float: right;
+  padding: 13px 16px;
+  margin-top: 16px;
+  font-family: 'GmarketSansMedium';
 }
 
 .container h1{
-text-align: center;
+  text-align: center;
+  font-family: 'GmarketSansMedium';
 }

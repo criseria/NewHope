@@ -1,26 +1,54 @@
-.voc-view-wrapper {
-    width: 60%;
-    margin: 0 auto;
+/* BoardUpdate.css */
+
+
+
+.update-container {
+  width: 70%;
+  margin: 0 auto;
 }
 
-.voc-view-go-list-btn {
-    border: 0;
-    padding: 10px;
-    background-color: #ffd9d9;
+.update-container h2 {
+  text-align: center;
+  font-size: 36px;
 }
 
-.voc-view-row {
-    margin: 10px 0;
-    display: flex;
+.label-content {
+  height: 300px;
 }
 
-.voc-view-row>label:first-child {
-    margin: 10px 0;
-    width: 30%;
-    font-weight: bold;
+
+.btn-update button {
+  background-color: #a0cfad;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+  align-self: flex-end; 
 }
 
-.voc-view-row>*:nth-child(2) {
-    margin: 10px 0;
-    width: 70%;
+.btn-update button:hover {
+  background-color: #26a826; 
+}
+
+.back-btn {
+  color: #b4b2b2; 
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+.btn-update {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.back-btn:hover {
+  color: black; 
 }

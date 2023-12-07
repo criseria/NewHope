@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetcher } from '../utils/fetcher';
+import './BoardUpdate.css'; // 추가된 부분
+import Footer from '../components/Footer';
 
 const BoardUpdate = () => {
   const { id } = useParams();
@@ -40,8 +42,12 @@ const BoardUpdate = () => {
   };
 
   return (
-    <div>
+    
+    <div className="update-container"> 
+    <br/>
       <h2>게시물 수정</h2>
+      <br/>
+      <br/>
       <form>
         <label>제목:</label>
         <input
@@ -50,20 +56,34 @@ const BoardUpdate = () => {
           value={postData.title}
           onChange={handleInputChange}
         />
-
+        <br/>
+        <br/>
         <label>내용:</label>
-        <textarea
+        <textarea className='label-content'
           name="content"
           value={postData.content}
           onChange={handleInputChange}
         />
 
-        <button type="button" onClick={handleUpdatePost}>
-          게시물 업데이트
-        </button>
+        <br/>
+        <br/>
+        <div className='btn-update'>
+          <button type="button" onClick={handleUpdatePost} className="update-btn"> {/* 수정된 부분 */}
+            게시물 업데이트
+          </button>
 
-        <Link to={`/board/${id}`}>돌아가기</Link>
+          <Link to={`/board/${id}`} className="back-btn" style={{color:'gray'}}>돌아가기</Link> 
+        </div>
       </form>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <Footer/>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-
+import '../components/NavBar.css';
 
 
 const NavBar = () => {
@@ -18,25 +18,29 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-      <Link to="/animal">유기동물소개</Link>
-      <Link to='/mainpage'> 메인</Link>
-      <Link to='/intro'> 소개</Link>
-      <Link to='/board'> 게시판</Link>
-      <Link to="/animal"> 유기동물소개</Link>
-      <p></p>
-      <Link to="/register">회원가입</Link>
-      <p></p>
-      {isLoggedIn ? (
-        <>
-          <Link to="/Mypage">Mypage</Link>
-          <button onClick={handleLogout}>로그아웃</button>
-        </>
-      ) : (
-          <Link to="/login">
-            로그인
-          </Link>
-        )}
+    <div className='navbar-main'><br/>
+      <div className="logo-container">
+        <Link to='/mainpage'><h1 style={{color:'green'}}>New Hope</h1></Link>
+        {/* <img src='dogcat.png' width={108} height={63.75}></img> */}
+      </div>
+        <div className="mnavbar" style={{color:'black'}} >
+          <Link to='/intro' style={{color:'black'}}> 소개</Link>
+          <Link to="/animal" style={{color:'black'}}>유기동물소개</Link>
+          <Link to='/board' style={{color:'black'}}> 게시판</Link>
+          <p></p><p></p>
+    
+          <Link to="/register" style={{color:'black'}}>회원가입 </Link>
+          {isLoggedIn ? (
+              <>
+              <Link to="/Mypage" style={{color:'black'}}>Mypage</Link>
+              <button className="logoutbtn" onClick={handleLogout} style={{fontSize: '18px'}}>로그아웃</button>
+              </>
+          ) : (
+              <Link to="/login" style={{color:'black'}}>
+                로그인
+              </Link>
+            )}
+      </div><br/>
     </div>
   );
 };

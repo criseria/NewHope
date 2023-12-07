@@ -1,0 +1,55 @@
+
+.project-intro {
+  font-family: 'GmarketSansMedium';
+  margin-top: 20px;
+  text-align: left;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.project-intro h1 {
+  font-size: 40px;
+  color: black;
+}
+
+.project-intro h2 {
+  font-size: 25px;
+  color: #242424;
+}
+
+.project-intro h5 {
+  font-size: 17px;
+  color: #333;
+}
+
+.project-intro ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.project-intro li {
+  margin-top: 120px;
+  text-align: left;
+  color: #636060; 
+}
+
+
+
+
+
+  .center-info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+  }
+
+  .center-info-table th {
+      background-color: #f2f2f2;
+      color: #1f1e1e; 
+      text-align: center; 
+  }
+
+  .center-info-table td {
+      font-size: 15px;
+      font-weight: normal;
+  }
