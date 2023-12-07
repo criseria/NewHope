@@ -21,7 +21,7 @@ const NavBar = () => {
     <div className='navbar-main'><br/>
       <div className="logo-container">
         <Link to='/mainpage'><h1 style={{color:'green'}}>New Hope</h1></Link>
-        {/* <img src='dogcat.png' width={108} height={63.75}></img> */}
+        <a href='/mainpage'><img src='Newlogo.jpg'></img></a>
       </div>
         <div className="mnavbar" style={{color:'black'}} >
           <Link to='/intro' style={{color:'black'}}> 소개</Link>
