@@ -1,5 +1,5 @@
 const express = require('express');
-const { product, payments, userOrder, orderSuccessfully, checkedCart, userCart, orderList, deleteCart, productDetail, userLikes, productCreate, likes, cart, order, userOrderSuccessfully, getOid } = require('../controllers/product.controller');
+const { product, payments, userOrder, orderSuccessfully, checkedCart, userCart, orderList, deleteCart, productDetail, userLikes, productCreate, likes, cart, order, userOrderSuccessfully, getOid, productDelete } = require('../controllers/product.controller');
 const { oid, bodyOid } = require('../middlewares/objectIdCheck')
 const productModel = require('../models/productModel')
 
@@ -23,6 +23,8 @@ router.post('/orderlist', orderList);
 
 router.put('/cart', deleteCart)
 router.patch('/cart', checkedCart)
+
+router.delete('/:id', productDelete)
 
 // router.get('/m/allProduct', async (req, res) => {
 //   const product = await productModel.find({})
