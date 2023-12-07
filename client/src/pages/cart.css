@@ -1,4 +1,4 @@
-.cart__cart-list{display:flex; flex-direction: column; gap:24px 0; box-shadow: 0 0 2px #787878;border-radius: 8px; overflow: hidden;}
+.cart__cart-list{display:flex; flex-direction: column; gap:24px 0; box-shadow: 0 0 2px #787878;border-radius: 8px; overflow: hidden; margin-top: 24px;}
 .cart__cart-item-wrap{display:flex; flex-direction: column; gap:20px 0; padding:0 8px;}
 .cart__cart-item{display:flex; position: relative;}
 .cart__cart-item .center__img-wrap{max-width: 120px; border-radius: 8px;}
