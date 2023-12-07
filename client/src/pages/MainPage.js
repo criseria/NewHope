@@ -1,15 +1,11 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
-import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card';
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function MainPage() {
   return (
     <>
 
       {/* 메인 사진 */}
-      <Carousel>
+      {/* <Carousel>
         <Carousel.Item>
           <div className='slidercontents'></div>
         </Carousel.Item>
@@ -17,7 +13,7 @@ function MainPage() {
           <div className='slidercontents1'></div>
         </Carousel.Item>
       </Carousel>
-      <br /><br />
+      <br /><br /> */}
 
 
       {/* 입양 절차 */}
@@ -118,7 +114,7 @@ function MainPage() {
 
         <ul>
           <div>
-            <Accordion>
+            {/* <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header> 1. 한 마리에게 여러 명의 입양 희망자가 생길 경우 어떻게 하나요? </Accordion.Header>
                 <Accordion.Body>
@@ -132,7 +128,7 @@ function MainPage() {
                 필요 물품들을 준비하여 편안한 가정환경을 만들어주시기 바랍니다.
               </Accordion.Body>
               </Accordion.Item>
-            </Accordion><br />
+            </Accordion><br /> */}
             <h6> 입양 후 파양은 불가합니다. 가족 구성원 모두가 신중하게 생각하시고 입양을 결정해주세요.</h6>
           </div><br />
         </ul>
