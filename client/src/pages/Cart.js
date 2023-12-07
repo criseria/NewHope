@@ -144,7 +144,7 @@ const Cart = () => {
     [cartItem])
 
   return (
-    <main style={{ paddingBottom: `${cartRef.current?.clientHeight || 0}px` }}>
+    <main style={{ paddingBottom: `120px` }}>
       <OrderConatiner>
         {cartItem.length !== 0 ?
           <>
