@@ -21,7 +21,7 @@ const ProductCreate = () => {
   const [year, setYear] = useState(new Date().getFullYear())
   const [month, setMonth] = useState(new Date().getMonth() + 1)
   const [date, setDate] = useState(new Date().getDate())
-  const { username, getUserId } = useUserId()
+  const { username, admin, getUserId } = useUserId()
 
   const onSubmitHandle = async (e) => {
     e.stopPropagation()
@@ -38,8 +38,11 @@ const ProductCreate = () => {
   useEffect(() => {
     getUserId()
     if (username === undefined) return
-    if (username === '') { return navigate('/login') }
-  }, [username])
+    if (!admin) {
+      alert('관리자만 작성할 수 있습니다.')
+      return navigate('/')
+    }
+  }, [username, admin])
 
   return (
     <div>
@@ -53,9 +56,6 @@ const ProductCreate = () => {
             <ProductInput ph={'가격을 입력해주세요.'} value={productPrice} setValue={(e) => { setProductPrice(e.target.value.replace(/[^0-9]/g, '')) }} id={'productPrice'} text={'가격'} />
             <ProductInput ph={'설명을 입력해주세요.'} value={productDescription} setValue={(e) => { setProductDescription(e.target.value) }} id={'productDescription'} text={'설명'} />
             <ProductDate year={year} month={month} date={date} setMonth={(e) => setMonth(e.target.value)} setYear={(e) => setYear(e.target.value)} setDate={(e) => setDate(e.target.value)} id={'productDate'} text={'날짜'} />
-            {/* <ProductInput value={year} setValue={() => { }} id={''} text={'년'} />
-            <ProductInput value={month} setValue={() => { }} id={''} text={'월'} />
-            <ProductInput value={date} setValue={() => { }} id={''} text={'일'} /> */}
           </div>
           <div className='product__create-button-wrap'>
             <button>등록</button>
