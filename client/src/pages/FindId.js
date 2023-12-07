@@ -6,6 +6,7 @@ import { fetcher } from '../utils/fetcher';
 import { Link, useNavigate } from 'react-router-dom';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import '../pages/FindId.css';
+import Footer from '../components/Footer';
 
 function FindId() {
     const {
@@ -112,6 +113,7 @@ function FindId() {
                     </div>
                 </form>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

@@ -27,7 +27,7 @@ const NavBar = () => {
     <div className='navbar-main'><br />
       <div className="logo-container">
         <Link to='/mainpage'><h1 style={{ color: 'green', marginLeft: '60px', marginBottom:'50px' }}>New Hope</h1></Link>
-        {/* <img src='dogcat.png' width={108} height={63.75}></img> */}
+        <a href='/mainpage'><img src='Newlogo.jpg'></img></a>
       </div>
       <div className="mnavbar" style={{ color: 'black' }} >
         <Link to='/intro' style={{ color: 'black' }}> 소개</Link>
@@ -47,8 +47,8 @@ const NavBar = () => {
           </div>
         ) : (
           <>
-            <Link to="/register">회원가입</Link>
-            <Link to="/login">로그인</Link>
+            <Link to="/register" style={{ color: 'black' }}>회원가입</Link>
+            <Link to="/login" style={{ color: 'black' }}>로그인</Link>
           </>
         )}
 
