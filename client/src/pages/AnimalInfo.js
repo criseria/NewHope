@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { fetcher } from '../utils/fetcher';
 import ReactPlayer from 'react-player';
 import Slider from 'react-slick';
@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../pages/AnimalInfo.css'
 import Footer from '../components/Footer';
+import { colors } from '@mui/material';
 
 const AnimalInfo = () => {
   const location = useLocation();
@@ -102,8 +103,11 @@ const AnimalInfo = () => {
         나이는 추정나이로써 실제 나이와 일치하지 않을 수 있으며, 성격 또한 입양 후 생활패턴이나 환경, 시간 등 변화에 따라 달라질 수 있으니 충분히 고려해보신 후 입양신청 해주세요.
       </div>
       <div className='button-container'>
-
-        <button className='button'>입양절차안내</button>
+        <button className='button'>
+          <Link to='https://animal.seoul.go.kr/adoptstep' target="_blank" rel="noopener noreferrer">
+            입양절차안내
+          </Link>
+        </button>
       </div>
       <Footer></Footer>
     </div>
