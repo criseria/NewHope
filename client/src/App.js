@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login';
 import Register from './pages/Register'
 import NavBar from './components/NavBar';
-import Footer from './components/footer';
+// import Footer from './components/footer';
 import Product from './pages/Product';
 import ProductDetail from './pages/ProductDetail';
 import ProductCreate from './pages/ProductCreate';
@@ -40,6 +40,7 @@ function App() {
           <NavBar />
           <Routes>
             {/* Intro Start*/}
+            <Route path='/' element={<MainPage />} />
             <Route path='/MainPage' element={<MainPage />} />
             <Route path='/procedure' element={<Procedure />} />
             <Route path='/Intro' element={<Intro />} />
@@ -81,7 +82,7 @@ function App() {
             <Route path="/notfound" element={<NotFound />} />
           </Routes>
           <Chatbot />
-          <Footer />
+          {/* <Footer /> */}
         </AuthProvider>
       </Router>
     </div >

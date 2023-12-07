@@ -1,0 +1,119 @@
+.board-container {
+  width: 70%;
+  margin: 0 auto;
+  font-family: 'GmarketSansMedium';
+  text-align: center;
+}
+
+.board-container h2 {
+  font-size: 36px;
+}
+
+.category-btn,
+.write-btn {
+  margin-bottom: 20px;
+}
+
+.category-btn button,
+.write-btn {
+  font-family: 'GmarketSansMedium';
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.category-btn {
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center items horizontally */  
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.category-btn button {
+  background-color: white;
+  color: #594a41;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.category-btn button.active {
+  background-color: #594a41;
+  color: white;
+}
+
+.category-btn button:not(.active):hover {
+  background-color: #594a41;
+  color: white;
+}
+
+.write-btn button{
+  font-family: 'GmarketSansMedium';
+  font-size: 16px;
+  padding: 15px 30px;
+  color: #594a41;
+  font-weight: 600;
+  background-color: white;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  margin-left: 0px;
+  float: right;
+}
+
+.write-btn button:hover {
+  background-color: #26a826;
+  color: white;
+}
+
+.review-container {
+  width: 80%;
+  margin: 0 auto;
+  font-family: 'GmarketSansMedium';
+  text-align: center;
+}
+
+.review-container ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.review-item {
+  width: 30%;
+  margin: 20px 0;
+  text-align: center;
+  padding: 20px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'GmarketSansMedium';
+}
+
+.review-item img {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .review-item {
+    width: 48%;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-item {
+    width: 100%;
+  }
+}
