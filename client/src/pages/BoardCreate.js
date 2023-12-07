@@ -27,7 +27,7 @@ function BoardCreate() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [userInfo, setUserInfo] = useState(null);
-  const [userId , setUserId] = useState('');
+  const [userId, setUserId] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,13 +35,11 @@ function BoardCreate() {
       try {
         const userId = await fetcher('get', '/auth/getUserInfo');
         setUserId(userId.userName);
-
-        if (userInfo) {
-          setUserInfo(userInfo);
-        } else {
-          console.error('사용자 정보를 가져오는 중 에러 발생');
-        }
+        setUserInfo(userId);
+        
       } catch (error) {
+        alert('로그인이 필요한 서비스입니다.');
+        navigate('/login');
         console.error('사용자 정보를 가져오는 중 오류 발생:', error);
       }
     };
@@ -63,7 +61,7 @@ function BoardCreate() {
     } else {
       try {
         const formData = new FormData();
-        
+
         formData.append('file', file);
         formData.append('categoryId', categoryId);
         formData.append('title', title);

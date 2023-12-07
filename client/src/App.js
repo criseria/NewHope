@@ -32,6 +32,7 @@ import Chatbot from './components/ChatBot';
 import BoardContent from './pages/BoardContent';
 import BoardUpdate from './pages/BoardUpdate';
 
+
 function App() {
   return (
     <div className="App">
@@ -81,7 +82,7 @@ function App() {
             {/* Board End */}
             <Route path="/notfound" element={<NotFound />} />
           </Routes>
-          <Chatbot />
+          {/* <Chatbot /> */}
           {/* <Footer /> */}
         </AuthProvider>
       </Router>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './MainPage.css';
 import Footer from "../components/Footer";
+import Chatbot from "../components/ChatBot";
 
 const images = [
   'image/mainimg1.jpg',
@@ -179,6 +180,7 @@ const MainPage = () => {
       </div><br/><br/><br /><br /><br /><br /><br />
 
      <Footer></Footer>
+     <Chatbot></Chatbot>
     </>
   );
 };

@@ -18,6 +18,8 @@ const register = async (req, res) => {
     }
 
     // 비밀번호 해싱 (10은 salt rounds를 나타낸다.)
+    // 이 값이 클수록 해시 생성에 더 많은 시간이 소요되므로 암호 해독을 더 어렵게 만든다.
+    // 그렇기에 sha가 아닌 bcrypt를 사용하여 암호화를 설정하였다.
     const hashedPassword = await bcrypt.hash(userData.userPassword, 10);
 
     const user = new userModel({
@@ -105,8 +107,15 @@ const logout = (req, res) => {
       console.error('Error destroying session:', err);
       res.status(500).json({ error: '서버 오류', message: '세션 제거 중 에러 발생' });
     } else {
+      console.log('세션 파괴 성공');
+
       // 클라이언트와 서버 측 캐시 무시 헤더 추가
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.setHeader('Expires', '0');
+      res.setHeader('Pragma', 'no-cache');
       res.setHeader('Cache-Control', 'no-store');
+
+      console.log('Destroyed session:', req.session);
       res.status(200).json({ message: '로그아웃 성공' });
     }
   });
@@ -188,7 +197,7 @@ const deleteAccount = async (req, res) => {
       res.clearCookie('dkfjdkfjaksfjddksjf3232');
       res.status(200).json({ message: '회원 탈퇴 성공' });
     } else {
-      res.status(401).json({ message: '비밀번호가 일치하지 않습니다.' });
+      res.status(401).json({ message: '비밀번호가 일치하지 않습니다.  ' });
     }
   } catch (error) {
     console.error('Error in deleteAccount:', error);
@@ -198,7 +207,7 @@ const deleteAccount = async (req, res) => {
 
 
 
-// 이메일 인증하기
+// nodemailer를 사용하여 이메일 인증하기
 const smtpTransport = mailer.createTransport({
   pool: true,
   maxConnections: 1,
@@ -222,6 +231,7 @@ const generateRandomNumber = function (min, max) {
   return randNum;
 };
 
+// 이메일 인증에 사용 될 6자리의 난수를 아래의 틀에 맞게 전송
 const emailAuth = async (req, res) => {
   const number = generateRandomNumber(111111, 999999);
   const { email, verificationCode } = req.body;

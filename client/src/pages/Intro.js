@@ -40,7 +40,7 @@ function Intro() {
                 </li>
                 <br/>
                 <li>
-                    <h2>센터 정보</h2>
+                    <h2>보호센터 정보</h2>
                     <table className="center-info-table">
                         <thead>
                             <tr>

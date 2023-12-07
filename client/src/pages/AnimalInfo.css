@@ -151,6 +151,9 @@ th {
     margin-bottom: 60px;
     font-family: 'GmarketSansMedium';
 }
+.button a:visited{
+    color: #fff;
+}
 
 .button-container{
     font-family: 'GmarketSansMedium';

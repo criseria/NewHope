@@ -5,6 +5,7 @@ import ProductCard from '../components/product/ProductCard'
 import Container from '../components/container/Container'
 import { useUserId } from '../hooks/useUserId'
 import './product.css'
+import Footer from '../components/Footer'
 
 const Product = () => {
   const [product, setProduct] = useState([])
@@ -36,6 +37,7 @@ const Product = () => {
           ))}
         </div>
       </Container>
+      <Footer></Footer>
     </div>
   )
 }
