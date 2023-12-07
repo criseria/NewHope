@@ -26,8 +26,8 @@ const NavBar = () => {
   return (
     <div className='navbar-main'><br />
       <div className="logo-container">
-        <Link to='/mainpage'><h1 style={{ color: 'green', marginLeft: '60px', marginBottom:'50px' }}>New Hope</h1></Link>
-        <a href='/mainpage'><img src='Newlogo.jpg'></img></a>
+        <Link to='/mainpage'><h1 style={{ color: 'green', marginLeft: '60px', marginBottom: '50px' }}>New Hope</h1></Link>
+        <a href='/mainpage'><img src='/Newlogo.jpg'></img></a>
       </div>
       <div className="mnavbar" style={{ color: 'black' }} >
         <Link to='/intro' style={{ color: 'black' }}> 소개</Link>
@@ -46,11 +46,11 @@ const NavBar = () => {
             </div>
           </div>
         ) : (
-          <>
-            <Link to="/register" style={{ color: 'black' }}>회원가입</Link>
-            <Link to="/login" style={{ color: 'black' }}>로그인</Link>
-          </>
-        )}
+            <>
+              <Link to="/register" style={{ color: 'black' }}>회원가입</Link>
+              <Link to="/login" style={{ color: 'black' }}>로그인</Link>
+            </>
+          )}
 
         {isLoggedIn && (
           <button className="logoutbtn" onClick={handleLogout} style={{ fontSize: '18px', marginLeft: '10px' }}>
