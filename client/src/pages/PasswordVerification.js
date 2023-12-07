@@ -37,24 +37,26 @@ const PasswordVerification = () => {
   };
 
   return (
-    <div className='Common-container'>
-      <h2>비밀번호 확인</h2>
-      <TextField
-        helperText="Please enter your Password"
-        id="demo-helper-text-misaligned"
-        label="비밀번호"
-        type='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        disabled={isLoading}
-      />
-      <div className='Common-btn'>
-        <ButtonGroup variant="text" aria-label="text button group">
-          <Button type="submit" size="medium" onClick={handlePasswordVerification} disabled={isLoading}>
-            확인
-          </Button>
-          <Link to='/Mypage' className="MuiButton-root"><Button>취소</Button></Link>
-        </ButtonGroup>
+    <div>
+      <div className='Common-container'>
+        <h1>비밀번호 확인</h1>
+        <TextField
+          helperText="Please enter your Password"
+          id="demo-helper-text-misaligned"
+          label="비밀번호"
+          type='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          disabled={isLoading}
+        />
+        <div className='Common-btn'>
+          <ButtonGroup variant="text" aria-label="text button group">
+            <Button type="submit" size="medium" onClick={handlePasswordVerification} disabled={isLoading}>
+              확인
+            </Button>
+            <Link to='/Mypage' className="MuiButton-root"><Button>취소</Button></Link>
+          </ButtonGroup>
+        </div>
       </div>
     </div>
   );

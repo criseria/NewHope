@@ -6,6 +6,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../pages/AnimalInfo.css'
+import Footer from '../components/Footer';
 
 const AnimalInfo = () => {
   const location = useLocation();
@@ -104,6 +105,7 @@ const AnimalInfo = () => {
 
         <button className='button'>입양절차안내</button>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
