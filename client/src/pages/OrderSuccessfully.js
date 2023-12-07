@@ -16,15 +16,20 @@ const OrderSucessfully = () => {
     const res = await fetcher('get', `/product/ordersuccessfully/${username}`)
     setOrderList(res)
   }
+  const orderLength = orderList.orderItems?.length
 
   useEffect(() => {
     getUserId()
     if (username === undefined) return
     if (username === '') { return navigate('/login') }
+    if (orderLength < 1) {
+      alert('구매 내역이 없습니다. 홈으로 이동합니다.')
+      return navigate('/')
+    }
     getOrder()
-  }, [username])
+  }, [username, orderLength])
 
-  const orderLength = orderList.orderItems?.length
+
   return (
     <main>
       <OrderContainer>
