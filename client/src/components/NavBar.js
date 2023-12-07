@@ -39,10 +39,10 @@ const NavBar = () => {
           <div className="dropdown">
             <button className="dropbtn" style={{ color: 'black' }}> <Link to="/Mypage" style={{ color: 'black' }}>Mypage</Link></button>
             <div className="dropdown-content">
-              <Link to="/passwordVerification">정보 수정</Link>
-              <Link to="/Mypage/DeleteAccount">회원 탈퇴</Link>
-              <Link to="/cart">장바구니</Link>
-              <Link to="/ordersuccessfully">구매 내역</Link>
+              <Link to="/passwordVerification" style={{ color: 'black' }}>정보 수정</Link>
+              <Link to="/Mypage/DeleteAccount" style={{ color: 'black' }}>회원 탈퇴</Link>
+              <Link to="/cart" style={{ color: 'black' }}>장바구니</Link>
+              <Link to="/ordersuccessfully" style={{ color: 'black' }}>구매 내역</Link>
             </div>
           </div>
         ) : (
