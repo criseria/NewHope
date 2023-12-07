@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { fetcher } from '../utils/fetcher'
-import IrTitle from '../components/text/IrTitle'
+import Title from '../components/text/Title'
 import ProductCard from '../components/product/ProductCard'
 import Container from '../components/container/Container'
 import { useUserId } from '../hooks/useUserId'
@@ -30,8 +30,8 @@ const Product = () => {
   return (
     <div>
       <Container>
-        <IrTitle text={'상품 페이지'} />
-        <div className='product__product-item-list'>
+        <Title text={'다양한 봉사 활동을 만나보세요'} />
+        <div className='product__product-item-list' style={{ marginTop: '24px' }} >
           {product.map(i => (
             <ProductCard key={i._id} {...i} isLike={isLike} username={username} />
           ))}
