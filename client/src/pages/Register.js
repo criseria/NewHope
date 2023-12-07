@@ -6,6 +6,7 @@ import useEmailVerification from '../hooks/useEmailVerification';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './Register.css';
+import Footer from '../components/Footer';
 
 function Register() {
   const {
@@ -167,136 +168,139 @@ function Register() {
   };
 
   return (
-    <div className='register'>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <h1>NewHope 계정 만들기</h1>
-          <div className="form-id">
-            <TextField
-              id="demo-helper-text-misaligned"
-              label="아이디"
-              type='text'
-              name="userId"
-              value={formData.userId}
-              onChange={handleInputChange}
-            />
-            <Button type="button" color='success' variant="contained" size="medium" onClick={handleIdCheck}>
-              중복 체크
-            </Button>
-          </div>
-          <p></p>
-          <div className="form-group">
-            <TextField
-              id="demo-helper-text-misaligned"
-              label="비밀번호"
-              type='password'
-              name="userPassword"
-              value={formData.userPassword}
-              onChange={handleInputChange}
-            />
-            <p></p>
-            <span style={{ color: 'red' }}>{passwordError}</span>
-          </div>
-          <p></p>
-          <div className="form-group">
-            <TextField
-              id="demo-helper-text-misaligned"
-              label="이름"
-              type='text'
-              name="userName"
-              value={formData.userName}
-              onChange={handleInputChange}
-            />
-          </div>
-          <p></p>
-          <div className="form-email">
-            <TextField
-              id="demo-helper-text-misaligned"
-              label="이메일"
-              type='text'
-              name="userEmail"
-              value={formData.userEmail}
-              onChange={handleInputChange}
-            />
-            <span style={{ color: 'red' }}>{emailError}</span>
-            <Button type="button" variant="contained" size="medium" onClick={handleSendVerification} disabled={isVerificationSent}>
-              인증 코드
-            </Button>
-
-          </div>
-          <div className="form-verificationCode">
-            <TextField
-              id="demo-helper-text-misaligned"
-              label="인증 코드"
-              type='text'
-              name="verificationCode"
-              value={formData.verificationCode}
-              onChange={handleVerificationCodeInput}
-            />
-            <Button type="button" variant="contained" color='success' size="medium" onClick={handleVerifyCode} disabled={!isVerificationSent}>
-              인증 확인
-            </Button>
-          </div>
-          <p></p>
-          <div>
-            <div className='form-postcode'>
+    <div>
+      <div className='register'>
+        <div className="container">
+          <form onSubmit={handleSubmit}>
+            <h1>NewHope 계정 만들기</h1>
+            <div className="form-id">
               <TextField
                 id="demo-helper-text-misaligned"
-                label="우편번호"
+                label="아이디"
                 type='text'
-                name="postcode"
-                value={formData.userPostcode}
-                readOnly
+                name="userId"
+                value={formData.userId}
+                onChange={handleInputChange}
               />
-              <Button type="button" variant="contained" size="medium" onClick={handleAddressSearch}>
-                주소 검색
+              <Button type="button" color='success' variant="contained" size="medium" onClick={handleIdCheck}>
+                중복 체크
               </Button>
             </div>
-            {isPostcodeOpen && (
-              <div className="modal">
-                <div className="modal-content">
-                  <DaumPostcode onComplete={handleComplete} />
-                  <button onClick={() => setIsPostcodeOpen(false)}>닫기</button>
-                </div>
-              </div>
-            )}
-            <div className='form-address'>
+            <p></p>
+            <div className="form-group">
               <TextField
                 id="demo-helper-text-misaligned"
-                label="주소"
-                type='text'
-                name="userAddress"
-                value={formData.userAddress}
-                readOnly
+                label="비밀번호"
+                type='password'
+                name="userPassword"
+                value={formData.userPassword}
+                onChange={handleInputChange}
               />
+              <p></p>
+              <span style={{ color: 'red' }}>{passwordError}</span>
+            </div>
+            <p></p>
+            <div className="form-group">
               <TextField
                 id="demo-helper-text-misaligned"
-                label="상세주소"
+                label="이름"
                 type='text'
-                name="userDetailAddress"
-                value={formData.userDetailAddress}
+                name="userName"
+                value={formData.userName}
                 onChange={handleInputChange}
               />
             </div>
-          </div>
-          <p></p>
-          <div className="form-group">
-            <TextField
-              id="demo-helper-text-misaligned"
-              label="핸드폰번호"
-              type='text'
-              name="userPhoneNum"
-              value={formData.userPhoneNum}
-              onChange={handleInputChange}
-            />
-          </div>
-          <p></p>
-          <Button type="submit" variant="contained" size="medium" disabled={!isSignUpButtonEnabled}>
-            회원가입
-          </Button>
+            <p></p>
+            <div className="form-email">
+              <TextField
+                id="demo-helper-text-misaligned"
+                label="이메일"
+                type='text'
+                name="userEmail"
+                value={formData.userEmail}
+                onChange={handleInputChange}
+              />
+              <span style={{ color: 'red' }}>{emailError}</span>
+              <Button type="button" variant="contained" size="medium" onClick={handleSendVerification} disabled={isVerificationSent}>
+                인증 코드
+              </Button>
 
-        </form>
+            </div>
+            <div className="form-verificationCode">
+              <TextField
+                id="demo-helper-text-misaligned"
+                label="인증 코드"
+                type='text'
+                name="verificationCode"
+                value={formData.verificationCode}
+                onChange={handleVerificationCodeInput}
+              />
+              <Button type="button" variant="contained" color='success' size="medium" onClick={handleVerifyCode} disabled={!isVerificationSent}>
+                인증 확인
+              </Button>
+            </div>
+            <p></p>
+            <div>
+              <div className='form-postcode'>
+                <TextField
+                  id="demo-helper-text-misaligned"
+                  label="우편번호"
+                  type='text'
+                  name="postcode"
+                  value={formData.userPostcode}
+                  readOnly
+                />
+                <Button type="button" variant="contained" size="medium" onClick={handleAddressSearch}>
+                  주소 검색
+                </Button>
+              </div>
+              {isPostcodeOpen && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <DaumPostcode onComplete={handleComplete} />
+                    <button onClick={() => setIsPostcodeOpen(false)}>닫기</button>
+                  </div>
+                </div>
+              )}
+              <div className='form-address'>
+                <TextField
+                  id="demo-helper-text-misaligned"
+                  label="주소"
+                  type='text'
+                  name="userAddress"
+                  value={formData.userAddress}
+                  readOnly
+                />
+                <TextField
+                  id="demo-helper-text-misaligned"
+                  label="상세주소"
+                  type='text'
+                  name="userDetailAddress"
+                  value={formData.userDetailAddress}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+            <p></p>
+            <div className="form-group">
+              <TextField
+                id="demo-helper-text-misaligned"
+                label="핸드폰번호"
+                type='text'
+                name="userPhoneNum"
+                value={formData.userPhoneNum}
+                onChange={handleInputChange}
+              />
+            </div>
+            <p></p>
+            <Button type="submit" variant="contained" size="medium" disabled={!isSignUpButtonEnabled}>
+              회원가입
+            </Button>
+
+          </form>
+        </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
