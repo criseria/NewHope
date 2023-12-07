@@ -13,6 +13,7 @@ import CenterImg from '../components/image/CenterImg'
 import { Link } from 'react-router-dom'
 import { useUserId } from '../hooks/useUserId'
 import ProductQuantity from '../components/ProductQuantity'
+import FixedModal from '../components/modal/FixedModal'
 
 export const onLike = async (username, id) => {
   // 좋아요, 좋아요 취소
@@ -32,6 +33,7 @@ const ProductDetail = () => {
   const [msg, setMsg] = useState(false)
   const [product, setProduct] = useState({})
   const [hasItem, setHasItem] = useState([])
+  const [deleteMsg, setDeleteMsg] = useState(false)
   const { username, getUserId } = useUserId()
 
   const getProduct = async () => {
@@ -67,6 +69,11 @@ const ProductDetail = () => {
     setQuantity(1)
   }
 
+  const productDelete = async () => {
+    const res = await fetcher('delete', `/product/${id}`)
+    return navigate('/product')
+  }
+
   useEffect(() => {
     getUserId()
     if (username === undefined) return
@@ -91,12 +98,12 @@ const ProductDetail = () => {
   }
   return (
     <main>
-      <Link to={'/product'}>
-        Back
-      </Link>
       {Object.keys(product).length !== 0 ?
         <>
           <IrTitle text={'상품 상세 페이지'} />
+          {/* <Link className={"product__detail-product-wrap"} to={'/product'} style={{ padding: '0 12px', boxSizing: 'border-box' }}>
+            전체 일정 보기
+          </Link> */}
           <div className='product__detail-product-wrap'>
             <div className='product__detail-thumbnail'>
               <CenterImg src={product.productImage} alt={'상품 이미지'} />
@@ -167,7 +174,20 @@ const ProductDetail = () => {
               :
               ""
             }
+            {username === product.owner._id ?
+              <button className={'product__delete-button'} onClick={() => setDeleteMsg(true)}>
+                일정 삭제
+              </button>
+              : ""}
           </div>
+          {
+            deleteMsg ?
+              <FixedModal text={'해당 일정을 삭제하시겠습니까?'}
+                action={() => productDelete()} secondaryAction={() => setDeleteMsg(false)}
+                actionLabel={'삭제'} secondaryLabel={'취소'}
+                btn_cls={'cart__delete-btn'} secondary_btn_cls={'cart__cancel-btn'} />
+              : ""
+          }
         </>
         : ''}
     </main>
