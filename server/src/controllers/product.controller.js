@@ -5,15 +5,15 @@ const orderListModel = require('../models/orderListModel')
 const findUser = require('../utils/findUser')
 
 const product = async (req, res) => {
-  const user = req.session.user
-  console.log(user)
-  const productList = await productModel.find({ schedule: { $gt: new Date() } })
+  const productList = await productModel.find({ schedule: { $gt: new Date() } }).sort({ schedule: 1 })
   res.send(productList)
 }
 
 const getOid = (req, res) => {
   const username = req.session.user?._id || ''
-  res.send(username)
+  const user = req.session.user?.userName || ''
+  const admin = user === 'admin' ? true : false
+  res.send({ username, admin })
 }
 
 const productCreate = async (req, res) => {
@@ -223,5 +223,13 @@ const userOrderSuccessfully = async (req, res) => {
   res.send(Object(...recentOrder))
 }
 
+const productDelete = async (req, res) => {
+  const { id } = req.params
+  console.log(id)
+  const deleteProduct = await productModel.findByIdAndDelete(id)
 
-module.exports = { product, productDetail, payments, productCreate, likes, cart, order, orderList, userLikes, userCart, deleteCart, checkedCart, userOrder, orderSuccessfully, userOrderSuccessfully, getOid }
+  if (!deleteProduct) return console.log('해당 상품이 존재하지 않습니다.')
+  res.send('삭제 완료')
+}
+
+module.exports = { product, productDetail, productDelete, payments, productCreate, likes, cart, order, orderList, userLikes, userCart, deleteCart, checkedCart, userOrder, orderSuccessfully, userOrderSuccessfully, getOid }
